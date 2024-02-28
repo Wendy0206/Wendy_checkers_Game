@@ -28,6 +28,16 @@ margin-top: 10%;
  
 }
 
+.button_div {
+    width: 50px;
+    height: 50px;
+   margin: auto;
+   position: absolute;
+bottom: 10%;
+ right: 10%;
+ 
+}
+
 span{
     display: inline-block;
     width: 100px;
@@ -44,6 +54,6 @@ span{
     display: flex;
    justify-content: center;
    border-radius: 50%;
-   border: 1px solid dark;
+   border: 3px solid dark;
 
 }

@@ -57,6 +57,14 @@ else if(countMove==9){
 
 },[countMove]);
 
+function Reset_board (){
+    setWinnerE('visible');
+    setWinnerF('hidden');
+
+}
+          
+          
+
 
 function Move_cell (index){
 
@@ -116,6 +124,9 @@ function Move_cell (index){
        </div>
        <div className="img_div" style={{visibility: winnerF}} >
 		<img src={Win} alt="test image"/>
+		</div>
+        <div className="button_div" >
+		<button type="button" class="btn btn-info" onClick={()=>Reset_board()}>Start Over</button>
 		</div>
   
 </div>
