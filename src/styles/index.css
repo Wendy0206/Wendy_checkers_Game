@@ -10,3 +10,38 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+body{
+background-color: white;
+margin-top: 10%;;
+
+}
+.theBoard{
+
+    width: 300px;
+    height: 300px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr ;
+    gap: 15px;
+    position: relative;
+
+ margin: auto;
+ 
+}
+span{
+    width: 100px;
+    height: 100px;  
+}
+
+.white{
+    width: 100px;
+    height: 100px;
+    background-color: lightcoral;
+    align-items: center;
+    text-align: center;
+}
+.black{
+    width: 100px;
+    height: 100px;
+    background-color: lightcoral;
+}
