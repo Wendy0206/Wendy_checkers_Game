@@ -26,24 +26,22 @@ function Move_c11 (index){
     }
     else{
         arrayStatus[index]=1;
-        setCellStatus(arrayStatus);
-        console.log(cellStatus);
+        setCellStatus(cellStatus.map(element,ind)=>ind==index? 'O': element));
+        console.log('test '+cellStatus[index]);
        
         if(countMove%2!=0){
         setMoveSymbol('O');
       //   arrayValue[index]='o';
-     //  setBoardValue(boardValue.map((ind,element)=>ind==index? 'O':element));
-          //  setBoardValue([]);
-            console.log(index);
-            //console.log(boardValue);
-
+      setBoardValue(boardValue.map((element,ind)=>ind==index? 'O': element));
+         
+            console.log(index + ' is the ONLY INDEX that SHOULD BE UPDATED'+ boardValue);
 
         }
         if(countMove%2==0){
             setMoveSymbol('X');
-           //  setBoardValue(boardValue.map((ind,element)=>ind==2? 'X': element));
-           // console.log(boardValue);
-            console.log(index);
+            setBoardValue(boardValue.map((element,ind)=> (ind==index)? 'X': element));
+      
+            console.log(index + ' is the ONLY INDEX that SHOULD BE UPDATED ' + boardValue);
            
         }
         setCountMove(countMove+1);
