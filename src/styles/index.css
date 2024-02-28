@@ -29,19 +29,16 @@ margin-top: 10%;;
  
 }
 span{
+    display: inline-block;
     width: 100px;
     height: 100px;  
 }
 
-.white{
+.white, .black{
     width: 100px;
     height: 100px;
     background-color: lightcoral;
-    align-items: center;
-    text-align: center;
-}
-.black{
-    width: 100px;
-    height: 100px;
-    background-color: lightcoral;
+    display: flex;
+   justify-content: center;
+
 }
