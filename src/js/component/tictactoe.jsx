@@ -7,10 +7,8 @@ import { useState, useEffect } from "react";
 export const TicTacToe= ()=> {
     const [boardValue, setBoardValue] = useState(['','','','','','','','','']);
     const [countMove, setCountMove] = useState(0);
-    const [MoveSymbol, setMoveSymbol] = useState(0);
-    const [cellStatus, setCellStatus] = useState([0,0,0,0,0,0,0,0,0]);
-let arrayStatus=[0,0,0,0,0,0,0,0,0];
- // let arrayValue=['','','','','','','','',''];
+    const [cellStatus, setCellStatus] = useState([2,2,2,2,2,2,2,2,2]);
+
     useEffect(()=>{
 
 
@@ -19,32 +17,32 @@ let arrayStatus=[0,0,0,0,0,0,0,0,0];
 function Move_c11 (index){
 
 // verify the statusof the cell
-    if(cellStatus[index]==1)
+    if(cellStatus[index]==1 || cellStatus[index]==0 )
     {
       alert('You cant play again here');
         
     }
     else{
-        arrayStatus[index]=1;
-        setCellStatus(cellStatus.map(element,ind)=>ind==index? 'O': element));
-        console.log('test '+cellStatus[index]);
        
+     
         if(countMove%2!=0){
-        setMoveSymbol('O');
+       
       //   arrayValue[index]='o';
       setBoardValue(boardValue.map((element,ind)=>ind==index? 'O': element));
+      setCellStatus(cellStatus.map((element,ind)=>ind==index? 0 : element))
          
-            console.log(index + ' is the ONLY INDEX that SHOULD BE UPDATED'+ boardValue);
-
         }
         if(countMove%2==0){
-            setMoveSymbol('X');
+          
             setBoardValue(boardValue.map((element,ind)=> (ind==index)? 'X': element));
-      
-            console.log(index + ' is the ONLY INDEX that SHOULD BE UPDATED ' + boardValue);
+            setCellStatus(cellStatus.map((element,ind)=>ind==index? 1 : element))
+    
            
         }
         setCountMove(countMove+1);
+       
+        setCellStatus(cellStatus.map((element,ind)=>ind==index? 1 : element));
+        console.log(cellStatus);
        
        
     }

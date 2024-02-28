@@ -31,7 +31,9 @@ margin-top: 10%;;
 span{
     display: inline-block;
     width: 100px;
-    height: 100px;  
+    height: 100px;
+    font-size: 60px;
+    color: gray;  
 }
 
 .white, .black{
