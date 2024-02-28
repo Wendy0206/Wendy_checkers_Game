@@ -1,6 +1,7 @@
 import { element } from "prop-types";
 import React from "react";
 import { useState, useEffect } from "react";
+import Win from '../../img/Win.gif'
 
 
 //create your first component
@@ -8,8 +9,9 @@ export const TicTacToe= ()=> {
     const [boardValue, setBoardValue] = useState(['','','','','','','','','']);
     const [countMove, setCountMove] = useState(0);
     const [cellStatus, setCellStatus] = useState([2,2,2,2,2,2,2,2,2]);
+    const [winnerE, setWinnerE] = useState('visible');
+    const [winnerF, setWinnerF] = useState('hidden');
    
-    let interval;
 
     useEffect(()=>{
       
@@ -25,23 +27,34 @@ export const TicTacToe= ()=> {
  
     if(countMove>4 && (verticalW=='XXX' || verticalW2=='XXX' || verticalW3=='XXX' || horizontalW=='XXX' || horizontalW2=='XXX' || horizontalW3=='XXX' || diagonal=='XXX'|| diagonal2=='XXX')){
     
-        alert('Someone wins');
+       // alert('You win');
         setCountMove(0);
         setCellStatus(cellStatus.map((element,ind)=>(ind==ind)? 2 : element));
         setBoardValue(boardValue.map((element,ind)=> (ind==ind)? '': element));  
+        setWinnerE('hidden');
+        setWinnerF('visible');
+      
 }
-if(countMove>4 && (verticalW=='OOO' || verticalW2=='OOO' || verticalW3=='OOO' || horizontalW=='OOO' || horizontalW2=='OOO' || horizontalW3=='OOO' || diagonal=='OOO'|| diagonal2=='OOO')){
+else if(countMove>4 && (verticalW=='OOO' || verticalW2=='OOO' || verticalW3=='OOO' || horizontalW=='OOO' || horizontalW2=='OOO' || horizontalW3=='OOO' || diagonal=='OOO'|| diagonal2=='OOO')){
     
-    alert('Someone wins');
+  //  alert('Someone wins');
+    setCountMove(0);
     setCellStatus(cellStatus.map((element,ind)=>(ind==ind)? 2 : element));
     setBoardValue(boardValue.map((element,ind)=> (ind==ind)? '': element));  
+    setWinnerE('hidden');
+   setWinnerF('visible');
+}
+else if(countMove==9){
+  
+    setCellStatus(cellStatus.map((element,ind)=>(ind==ind)? 2 : element));
+    setBoardValue(boardValue.map((element,ind)=> (ind==ind)? '': element)); 
+    setWinnerE('none');
+    setWinnerF('flex');
 }
 
 
 
-return ()=>{
-clearInterval(interval);
-}
+
 },[countMove]);
 
 
@@ -89,7 +102,7 @@ function Move_cell (index){
 
 	return	(
         <div class="container">
-       <div className="theBoard">
+       <div className="theBoard" style={{visibility: winnerE}} >
         <div className="c1 white" ><span onClick={()=>Move_cell(0)}>{boardValue[0]}</span></div>
         <div className="c12 black" ><span onClick={()=>Move_cell(1)}>{boardValue[1]}</span></div>
         <div className="c13 white"><span onClick={()=>Move_cell(2)}>{boardValue[2]}</span></div>
@@ -101,6 +114,9 @@ function Move_cell (index){
         <div className="c33 white"><span onClick={()=>Move_cell(8)}>{boardValue[8]}</span></div>
 
        </div>
+       <div className="img_div" style={{visibility: winnerF}} >
+		<img src={Win} alt="test image"/>
+		</div>
   
 </div>
     );
