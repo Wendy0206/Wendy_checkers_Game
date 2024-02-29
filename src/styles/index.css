@@ -54,7 +54,7 @@ span{
 }
 h1{
     font-size: 50px;
-    color: lightcoral;  
+    color: rgb(225, 89, 89);  
     font-weight: 500;
 }
 h3{
@@ -65,12 +65,23 @@ h3{
 }
 
 .button_div {
-    width: 50px;
-    height: 50px;
+    display: flex;
+    gap: 5px;
+    width: 200px;
+    height: 70px;
    margin: auto;
    position: absolute;
-bottom: 10%;
+bottom: 20%;
  right: 10%;
  
+    margin-bottom: 30px;
+ 
+}
+
+button{
+    font-size: 10px;
+    text-align: center;
+    font-weight: 300;
+    height: 90px;
 }
 
