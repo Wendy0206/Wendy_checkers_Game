@@ -57,6 +57,12 @@ h1{
     color: lightcoral;  
     font-weight: 500;
 }
+h3{
+    font-size: 30px;
+    color: #f08080;  
+    font-weight: 500;
+    margin-bottom: 30px;
+}
 
 .button_div {
     width: 50px;

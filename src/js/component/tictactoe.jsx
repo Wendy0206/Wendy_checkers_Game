@@ -11,8 +11,9 @@ export const TicTacToe= ()=> {
     const [cellStatus, setCellStatus] = useState([2,2,2,2,2,2,2,2,2]);
     const [winnerE, setWinnerE] = useState('visible');
     const [winnerF, setWinnerF] = useState('hidden');
-    const [player, setPlayer] = useState(['Player 1'],['Player 2']);
-    const [finalplayer, setFinalPlayer] = useState(['']);
+    const [playerName, setPlayerName] = useState('hidden');
+    const [player, setPlayer] = useState(['Player 1','Player 2']);
+    const [finalplayer, setFinalPlayer] = useState('');
 
     useEffect(()=>{
       
@@ -33,6 +34,8 @@ export const TicTacToe= ()=> {
            if(countMove==2){
              let new2=prompt("Please tell us who is playing right now");
                setPlayer(player.map((element,ind)=>ind==1? new2: element));
+               setPlayerName('visible');
+
                 }
 
     if(countMove>4 && (verticalW=='XXX' || verticalW2=='XXX' || verticalW3=='XXX' || horizontalW=='XXX' || horizontalW2=='XXX' || horizontalW3=='XXX' || diagonal=='XXX'|| diagonal2=='XXX')){
@@ -44,6 +47,7 @@ export const TicTacToe= ()=> {
         setBoardValue(boardValue.map((element,ind)=> (ind==ind)? '': element));  
         setWinnerE('hidden');
         setWinnerF('visible');
+        setPlayerName('hidden');
       
 }
 else if(countMove>4 && (verticalW=='OOO' || verticalW2=='OOO' || verticalW3=='OOO' || horizontalW=='OOO' || horizontalW2=='OOO' || horizontalW3=='OOO' || diagonal=='OOO'|| diagonal2=='OOO')){
@@ -54,6 +58,7 @@ else if(countMove>4 && (verticalW=='OOO' || verticalW2=='OOO' || verticalW3=='OO
     setBoardValue(boardValue.map((element,ind)=> (ind==ind)? '': element));  
     setWinnerE('hidden');
    setWinnerF('visible');
+   setPlayerName('hidden');
    setFinalPlayer(player[1]);
 }
 else if(countMove==9){
@@ -72,6 +77,7 @@ else if(countMove==9){
 function Reset_board (){
     setWinnerE('visible');
     setWinnerF('hidden');
+    setPlayerName('hidden');
 
 }
           
@@ -90,8 +96,6 @@ function Move_cell (index){
 
     else{
         
-       
-     
         if(countMove%2!=0){
        
       //   arrayValue[index]='o';
@@ -122,7 +126,9 @@ function Move_cell (index){
 
 	return	(
         <div class="container">
+       <h3 style={{visibility: playerName}}>{player[0]} and {player[1]} are playing.</h3>
        <div className="theBoard" style={{visibility: winnerE}} >
+     
         <div className="c1 white" ><span onClick={()=>Move_cell(0)}>{boardValue[0]}</span></div>
         <div className="c12 black" ><span onClick={()=>Move_cell(1)}>{boardValue[1]}</span></div>
         <div className="c13 white"><span onClick={()=>Move_cell(2)}>{boardValue[2]}</span></div>
@@ -136,7 +142,7 @@ function Move_cell (index){
        </div>
 
        <div className="img_div" style={{visibility: winnerF}} >
-       <h1>{finalplayer} has won</h1>
+       <h1>{finalplayer} has won .</h1>
 		<img src={Win} alt="test image"/>
 		</div>
 
