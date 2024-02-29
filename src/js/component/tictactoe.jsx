@@ -136,7 +136,7 @@ function Move_cell (index){
        </div>
 
        <div className="img_div" style={{visibility: winnerF}} >
-       <p>{finalplayer}  has won</p>
+       <h1>{finalplayer} has won</h1>
 		<img src={Win} alt="test image"/>
 		</div>
 
