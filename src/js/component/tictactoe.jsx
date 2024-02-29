@@ -14,6 +14,8 @@ export const TicTacToe= ()=> {
     const [playerName, setPlayerName] = useState('hidden');
     const [player, setPlayer] = useState(['','']);
     const [finalplayer, setFinalPlayer] = useState('');
+    const [roundCount, setRoundCount] = useState('');
+    
 
     useEffect(()=>{
       
@@ -117,6 +119,7 @@ function reset_board (){
   setCellStatus(cellStatus.map((element,ind)=>(ind==ind)? 2 : element));
   setBoardValue(boardValue.map((element,ind)=> (ind==ind)? '': element)); 
   setPlayerName('visible');
+  setRoundCount("again ");
 
 }
 
@@ -127,13 +130,14 @@ setPlayerName('hidden');
 setCellStatus(cellStatus.map((element,ind)=>(ind==ind)? 2 : element));
 setBoardValue(boardValue.map((element,ind)=> (ind==ind)? '': element)); 
 setPlayer(player.map((element,ind)=> (ind==ind)? '': element));  
+setRoundCount("");
 }
   
    
 
 	return	(
         <div class="container">
-       <h3 style={{visibility: playerName}}>{player[0]} and {player[1]} are playing.</h3>
+       <h3 style={{visibility: playerName}}>{player[0]} and {player[1]} are playing {roundCount}.</h3>
        <div className="theBoard" style={{visibility: winnerE}} >
      
         <div className="c1 white" ><span onClick={()=>Move_cell(0)}>{boardValue[0]}</span></div>
