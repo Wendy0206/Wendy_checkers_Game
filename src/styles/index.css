@@ -1,87 +1,32 @@
 
 body{
 background-color: white;
-margin-top: 10%;
+margin-top: 7%;
 
 }
 .theBoard{
 
-    width: 300px;
-    height: 300px;
+    width: 80%;
+    height: 75vh;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
-    grid-template-rows: 1fr 1fr 1fr ;
-    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr  1fr 1fr 1fr 1fr ;
+    gap: 5px;
     position: relative;
 
  margin: auto;
  
 }
 
-span{
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    font-size: 60px;
-    color: gray;  
-    font-weight: 700;
+
+
+
+
+.white{
+    background-color: black;
 }
 
-
-
-.white, .black{
-    width: 100px;
-    height: 100px;
-    background-color: lightcoral;
-    display: flex;
-   justify-content: center;
-   border-radius: 50%;
-   border: 3px solid dark;
-
-}
-
-
-
-.img_div {
-    display: inline-block;
-    width: 600px;
-    height: 600px;
-   margin: auto;
-   position: absolute;
-  top:  10%;
-  left: 35%;
- 
-}
-h1{
-    font-size: 50px;
-    color: rgb(225, 89, 89);  
-    font-weight: 500;
-}
-h3{
-    font-size: 30px;
-    color: #f08080;  
-    font-weight: 500;
-    margin-bottom: 30px;
-}
-
-.button_div {
-    display: flex;
-    gap: 5px;
-    width: 200px;
-    height: 70px;
-   margin: auto;
-   position: absolute;
-bottom: 20%;
- right: 10%;
- 
-    margin-bottom: 30px;
- 
-}
-
-button{
-    font-size: 10px;
-    text-align: center;
-    font-weight: 300;
-    height: 90px;
+.black{
+    background-color: darkcyan;
 }
 
