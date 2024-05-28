@@ -90,6 +90,8 @@ if(all_sqr){
 }
 
 
+
+
 let all_current=document.querySelectorAll('.theBoard>div');
 if(all_current){
   for(let i=0; i<all_current.length; i++){
@@ -100,13 +102,18 @@ if(all_current){
 
 
 if(countMove%2==0){
+if(boardValue[board.position].checker==''){
 
+}
 }
 else{
+  if(boardValue[board.position].checker==''){
+
+  }
 
 }
 
-  if(boardValue[board.position].type==true){
+  if(boardValue[board.position].checker){
   // ne= North East, nw= North West, sw = South West, se= South East
  
 
