@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 
 
 export const Checkers= ()=> {
-     const [countMove, setCountMove] = useState(1);
+    const [countMove, setCountMove] = useState(1);
     const [boardValue ,setBoardValue ]= useState([]);
-      const [potentialMove, setPotentialMove]= useState([]);
+    const [potentialMove, setPotentialMove]= useState({first:null, second:null, current: null});
 
     useEffect(()=>{
 
@@ -89,9 +89,6 @@ if(all_sqr){
   } 
 }
 
-
-
-
 let all_current=document.querySelectorAll('.theBoard>div');
 if(all_current){
   for(let i=0; i<all_current.length; i++){
@@ -100,52 +97,106 @@ if(all_current){
   } 
 }
 
-
-if(countMove%2==0){
-if(boardValue[board.position].checker==''){
-
+if(boardValue[board.position].checker){
+if(board.position>40){
+second_player_check_move(board);
 }
-}
+
 else{
-  if(boardValue[board.position].checker==''){
-
-  }
-
+first_player_check_move(board);
 }
 
-  if(boardValue[board.position].checker){
-  // ne= North East, nw= North West, sw = South West, se= South East
- 
-
-if(boardValue[board.position+7].checker=='' && boardValue[board.position+7].type==true){
-  let nw_spot=board.position+7;
-  let get_id='#C'+nw_spot;
-let first_spot= document.querySelector(get_id);
-first_spot.classList.add('possible_move');
-
 }
-
-if( boardValue[board.position+9].checker=='' && boardValue[board.position+9].type==true){
-  let ne_spot=board.position+9;
-  let get_id='#C'+ne_spot;
-  let second_spot= document.querySelector(get_id);
-  second_spot.classList.add('possible_move');
-  let current_spot='#C'+board.position;
-  let this_spot= document.querySelector(current_spot);
-  this_spot.classList.add('current_move');
 }
 
 
+// if(countMove%2==0){
+// if(boardValue[board.position].checker=='O'){
+// first_player(board);
+// }
+// }
+
+// else{
+//   if(boardValue[board.position].checker=='X'){
+//  second_player(board);
+//   }
+
+// }
 
 
+   
+function first_player_check_move(board){
+// ne= North East, nw= North West, sw = South West, se= South East
+  var clone_obj= {first:null, second:null, current: board.position};
 
+  if(boardValue[board.position+7].checker=='' && boardValue[board.position+7].type==true){
+    let nw_spot=board.position+7;
+    let get_id='#C'+nw_spot;
+  let first_spot= document.querySelector(get_id);
+  first_spot.classList.add('possible_move');
+  clone_obj.first=nw_spot;
   }
   
-}
- 
+  
+  if(boardValue[board.position+9].checker=='' && boardValue[board.position+9].type==true){
+    let ne_spot=board.position+9;
+    let get_id='#C'+ne_spot;
+    let second_spot= document.querySelector(get_id);
+    second_spot.classList.add('possible_move');
+    let current_spot='#C'+board.position;
+    let this_spot= document.querySelector(current_spot);
+    this_spot.classList.add('current_move');
+   clone_obj.second=ne_spot;
+  
+  }
+  
+  setPotentialMove(clone_obj);
+  console.log('this is the potential move in our state : ', clone_obj);
+  
+    }
+
+
+
+function second_player_check_move(board){
+
+    // ne= North East, nw= North West, sw = South West, se= South East
    
+    var clone_obj= {first:null, second:null, current: board.position};
+  
+  if(boardValue[board.position-7].checker=='' && boardValue[board.position-7].type==true){
+    let ne_spot=board.position-7;
+    let get_id='#C'+ne_spot;
+  let first_spot= document.querySelector(get_id);
+  first_spot.classList.add('possible_move');
+  clone_obj.first=ne_spot;
+  }
+  
+  
+  if(boardValue[board.position-9].checker=='' && boardValue[board.position-9].type==true){
+    let nw_spot=board.position-9;
+    let get_id='#C'+nw_spot;
+  
+    let second_spot= document.querySelector(get_id);
+    second_spot.classList.add('possible_move');
+    let current_spot='#C'+board.position;
+    let this_spot= document.querySelector(current_spot);
+    this_spot.classList.add('current_move');
+   clone_obj.second=nw_spot;
+  
+  }
+  
+  
+  setPotentialMove(clone_obj);
+  console.log('this is the potential move in our state : ', clone_obj);
+
+  
+}
+
+
+
 
 	return	(
+
 
         <div class="container">
          <div class="theBoard"  >
