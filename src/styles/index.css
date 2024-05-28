@@ -15,6 +15,7 @@ margin-top: 2%;
     position: relative;
  margin: auto;
  
+ 
 }
 
 span{
@@ -35,24 +36,34 @@ span{
     background-color: #6F4E37;
 }
 
+.impossible_move{
+  border: 1px solid red;
+}
 
+
+.current_move{
+  border: 3px solid red;
+ 
+}
 
 .possible_move{
-  position: relative;
-  background-color: white;
-  animation: fadeIn 1.0s infinite ease-in-out; 
-  width: 100px;
-  height: 100px;
+  animation: blink 1.5s linear infinite;
+  background-color: rgb(86, 83, 83);
+  
   
 }
 
-@keyframes fadeIn {
-  0% { 
-  transform: scale(0.8);
+@keyframes blink {
+  25% { 
+ opacity: 0.5;
   }
 
+  50% { 
+    opacity: 0;
+     }
 
-  100% {
-    transform: scale(1.1)
+     
+  75% {
+    opacity: 0.5;
   }
 }
