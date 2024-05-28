@@ -18,15 +18,68 @@ margin-top: 7%;
  
 }
 
+span{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    font-size: 60px;
+    color: gray;  
+    font-weight: 700;
+}
 
+
+
+.light_brown{
+    background-color: #ECB176; 
+}
+
+.dark_brown{
+    background-color: #6F4E37;
+}
 
 
 
 .white{
-    background-color: black;
+    background-color: #6F4E37;
 }
 
 .black{
-    background-color: darkcyan;
+    background-color: #ECB176;
 }
 
+.App {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .board {
+    display: inline-block;
+    border: 2px solid black;
+  }
+  
+  .row {
+    display: flex;
+  }
+  
+  .square {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    box-sizing: border-box;
+  }
+  
+  .piece {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 5px;
+  }
+  
+  .piece.W {
+    background-color: white;
+  }
+  
+  .piece.B {
+    background-color: black;
+  }
+  

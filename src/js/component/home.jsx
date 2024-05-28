@@ -1,5 +1,5 @@
 import React from "react";
-import { TicTacToe } from "./tictactoe";
+import { Checkers } from "./checkers";
 //include images into your bundle
 
 
@@ -7,7 +7,7 @@ import { TicTacToe } from "./tictactoe";
 const Home = () => {
 	return (
 		<div className="text-center">
-		<TicTacToe/>
+		<Checkers/>
 		</div>
 	);
 };
