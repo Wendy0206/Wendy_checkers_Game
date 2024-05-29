@@ -97,13 +97,38 @@ if(all_current){
   } 
 }
 
+
+if(board.position==potentialMove.first || board.position==potentialMove.second){
+
+if(boardValue[potentialMove.current].checker=='O'){
+  let clone_board= [...boardValue];
+  clone_board[board.position].checker='O';
+  clone_board[potentialMove.current].checker='';
+  setBoardValue(clone_board);
+ 
+
+}else{
+  let clone_board= [...boardValue];
+  clone_board[board.position].checker='X';
+  clone_board[potentialMove.current].checker='';
+  setBoardValue(clone_board);
+ 
+
+}
+var clone_obj= {first:null, second:null, current:null};
+setPotentialMove(clone_obj);
+return;
+}
+
+
 if(boardValue[board.position].checker){
-if(board.position>40){
-second_player_check_move(board);
+if(boardValue[board.position].checker=='O'){
+
+first_player_check_move(board);
 }
 
 else{
-first_player_check_move(board);
+  second_player_check_move(board);
 }
 
 }
