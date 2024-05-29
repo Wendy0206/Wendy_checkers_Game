@@ -5,10 +5,10 @@ import { useState, useEffect } from "react";
 
 
 export const Checkers= ()=> {
-    const [countMove, setCountMove] = useState(1);
+    const [countMove, setCountMove] = useState(0);
     const [boardValue ,setBoardValue ]= useState([]);
     const [potentialMove, setPotentialMove]= useState({first:null, second:null, current: null});
-    const [playerScore, setPlayerScore]= useState({player:0,player2:0});
+    const [playerScore, setPlayerScore]= useState({player:0, playerM: 0, player2:0, player2M:0});
 
     useEffect(()=>{
 
@@ -25,12 +25,11 @@ const initialize_board= ()=>{
     let newObj={};
 newObj.type=false;
 newObj.checker='';
-newObj.id='T'+i;
+newObj.id='C'+i;
   if(reset_board[i-1].classN=='dark_brown'){
 
 if((i-1)%8==0){
   newObj.classN='dark_brown';
-  newObj.id='C'+i;
   newObj.type=true;
   if(i<24){
     newObj.checker='O';
@@ -53,7 +52,6 @@ else{
       }
       else{
         newObj.classN='dark_brown';
-        newObj.id='C'+i;
         newObj.type=true;
         if(i<24){
           newObj.checker='O';
@@ -71,6 +69,8 @@ newObj.position=i;
 reset_board.push(newObj);
 
   }  
+  console.log('This is our board position and data :');
+  console.log(reset_board);
  
 setBoardValue(reset_board);
 
@@ -102,12 +102,18 @@ if(boardValue[potentialMove.current].checker=='O'){
   clone_board[board.position].checker='O';
   clone_board[potentialMove.current].checker='';
   setBoardValue(clone_board);
+  let clone_player_score= {player: playerScore.player, playerM:playerScore.playerM+1 , player2: playerScore.player2, player2M:playerScore.player2M};
+  setPlayerScore(clone_player_score);
+ 
 
 }else{
   let clone_board= [...boardValue];
   clone_board[board.position].checker='X';
   clone_board[potentialMove.current].checker='';
   setBoardValue(clone_board);
+  let clone_player_score= {player: playerScore.player, playerM:playerScore.playerM , player2: playerScore.player2, player2M:playerScore.player2M+1};
+  setPlayerScore(clone_player_score);
+ 
 
 }
 
@@ -126,7 +132,8 @@ if(board.position==potentialMove.third){
     clone_board[board.position].checker='O';
     clone_board[potentialMove.current].checker='';
     clone_board[potentialMove.jump].checker='';
-   let clone_player_score= {player: playerScore.player+1,player2: playerScore.player2};
+    setCountMove(countMove+1);
+   let clone_player_score= {player: playerScore.player+1, playerM:playerScore.playerM+1 , player2: playerScore.player2, player2M:playerScore.player2M};
   setPlayerScore(clone_player_score);
     setBoardValue(clone_board);
   
@@ -135,7 +142,8 @@ if(board.position==potentialMove.third){
     clone_board[board.position].checker='X';
     clone_board[potentialMove.current].checker='';
     clone_board[potentialMove.jump].checker='';
-    let clone_player_score= {player: playerScore.player , player2: playerScore.player2+1};
+    setCountMove(countMove+1);
+    let clone_player_score= {player: playerScore.player , playerM:playerScore.playerM,  player2: playerScore.player2+1,player2M:playerScore.player2M+1};
   setPlayerScore(clone_player_score);
     setBoardValue(clone_board);
   
@@ -204,7 +212,7 @@ function first_player_check_move(board){
   clone_obj.jump= board.position+7;
   }
 
-  // check if you have second clean move
+  // check if you have a second clean move
   if(boardValue[board.position+9].checker=='' && boardValue[board.position+9].type==true){
     let ne_spot=board.position+9;
     let get_id='#C'+ne_spot;
@@ -276,6 +284,14 @@ clone_obj.jump= board.position-7;
 
 // check if your second potential move is a game
 
+if(boardValue[board.position-9].checker=='O' && boardValue[board.position-18].checker=='' ){
+  let nw_spot=board.position-18;
+  let get_id='#C'+nw_spot;
+let first_spot= document.querySelector(get_id);
+first_spot.classList.add('possible_move');
+clone_obj.third=nw_spot;
+clone_obj.jump= board.position-9;
+}
 
 
   setPotentialMove(clone_obj);
@@ -299,11 +315,14 @@ clone_obj.jump= board.position-7;
        </div>
 
        <div className="score_div">
-<p> Player 1 : {playerScore.player}<br/><br/>
+<h5> Player 1 : {playerScore.player}<br/>
+Move: {playerScore.playerM}<br/><br/>
   Player 2 : {playerScore.player2}<br/>
+  Move: {playerScore.player2M}<br/><br/><br/>
+  Total Move : {countMove}
 
 
-</p>
+</h5>
 
 
        </div>
