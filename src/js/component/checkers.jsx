@@ -102,6 +102,7 @@ if(boardValue[potentialMove.current].checker=='O'){
   clone_board[board.position].checker='O';
   clone_board[potentialMove.current].checker='';
   setBoardValue(clone_board);
+  setCountMove(countMove+1);
   let clone_player_score= {player: playerScore.player, playerM:playerScore.playerM+1 , player2: playerScore.player2, player2M:playerScore.player2M};
   setPlayerScore(clone_player_score);
  
@@ -111,6 +112,7 @@ if(boardValue[potentialMove.current].checker=='O'){
   clone_board[board.position].checker='X';
   clone_board[potentialMove.current].checker='';
   setBoardValue(clone_board);
+  setCountMove(countMove+1);
   let clone_player_score= {player: playerScore.player, playerM:playerScore.playerM , player2: playerScore.player2, player2M:playerScore.player2M+1};
   setPlayerScore(clone_player_score);
  
@@ -204,7 +206,9 @@ function first_player_check_move(board){
   
 // check if your first potential move is a game
   if(boardValue[board.position+7].checker=='X' && boardValue[board.position+14].checker=='' ){
+ 
     let nw_spot=board.position+14;
+    
     let get_id='#C'+nw_spot;
   let first_spot= document.querySelector(get_id);
   first_spot.classList.add('possible_move');
@@ -248,29 +252,42 @@ function second_player_check_move(board){
     // ne= North East, nw= North West, sw = South West, se= South East
    
     var clone_obj= {first:null, second:null, current: board.position};
-  
+  // check if our first move is clean
   if(boardValue[board.position-7].checker=='' && boardValue[board.position-7].type==true){
     let ne_spot=board.position-7;
     let get_id='#C'+ne_spot;
   let first_spot= document.querySelector(get_id);
   first_spot.classList.add('possible_move');
   clone_obj.first=ne_spot;
+  let current_spot='#C'+board.position;
+    let this_spot= document.querySelector(current_spot);
+    this_spot.classList.add('current_move');
   }
   
 
 // check if your first potential move is a game
-if(boardValue[board.position-7].checker=='O' && boardValue[board.position-14].checker=='' ){
+if(boardValue[board.position-7].checker=='O' && boardValue[board.position-14].checker=='' && boardValue[board.position-14].type==true ){
+  console.log('check our number and after : ' +nw_spot);
   let nw_spot=board.position-14;
+  console.log('check our number and after : ' +nw_spot);
   let get_id='#C'+nw_spot;
+
+  console.log('check our number and after : ' +nw_spot);
 let first_spot= document.querySelector(get_id);
 first_spot.classList.add('possible_move');
 clone_obj.third=nw_spot;
 clone_obj.jump= board.position-7;
+
+let current_spot='#C'+board.position;
+    let this_spot= document.querySelector(current_spot);
+    this_spot.classList.add('current_move');
 }
 
   // check your second potential move
-  if(boardValue[board.position-9].checker=='' && boardValue[board.position-9].type==true){
+  if(boardValue[board.position-9].checker=='' && boardValue[board.position-9].type==true ){
+    console.log('check our number and before : ' +nw_spot);
     let nw_spot=board.position-9;
+    console.log('check our number and after : ' +nw_spot);
     let get_id='#C'+nw_spot;
     let second_spot= document.querySelector(get_id);
     second_spot.classList.add('possible_move');
@@ -283,8 +300,7 @@ clone_obj.jump= board.position-7;
 
 
 // check if your second potential move is a game
-
-if(boardValue[board.position-9].checker=='O' && boardValue[board.position-18].checker=='' ){
+if(boardValue[board.position-9].checker=='O' && boardValue[board.position-18].checker=='' && boardValue[board.position-18].type==true ){
   let nw_spot=board.position-18;
   let get_id='#C'+nw_spot;
 let first_spot= document.querySelector(get_id);
