@@ -15,7 +15,6 @@ margin-top: 2%;
     position: relative;
  margin: auto;
  
- 
 }
 
 span{
@@ -26,6 +25,14 @@ span{
     color: gray;  
     font-weight: 700;
     cursor: pointer;
+}
+
+.score_div{
+  width: 120px;
+  height: fit-content;
+  background-color: black;
+  color: white;
+  padding: 3px ;
 }
 
 .light_brown{
@@ -48,6 +55,8 @@ span{
   border: 3px solid red;
  
 }
+
+
 
 .possible_move{
   animation: blink 1.5s linear infinite;
