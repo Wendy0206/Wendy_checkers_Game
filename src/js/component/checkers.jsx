@@ -70,14 +70,10 @@ newObj.position=i;
 reset_board.push(newObj);
 
   }  
-
-  console.log(reset_board)  
+ 
 setBoardValue(reset_board);
 
-
 }
-
-
 
       
           
@@ -105,19 +101,19 @@ if(boardValue[potentialMove.current].checker=='O'){
   clone_board[board.position].checker='O';
   clone_board[potentialMove.current].checker='';
   setBoardValue(clone_board);
- 
 
 }else{
   let clone_board= [...boardValue];
   clone_board[board.position].checker='X';
   clone_board[potentialMove.current].checker='';
   setBoardValue(clone_board);
- 
 
 }
+
 var clone_obj= {first:null, second:null, current:null};
 setPotentialMove(clone_obj);
 return;
+
 }
 
 
@@ -155,6 +151,7 @@ function first_player_check_move(board){
   var clone_obj= {first:null, second:null, current: board.position};
 
   if(boardValue[board.position+7].checker=='' && boardValue[board.position+7].type==true){
+
     let nw_spot=board.position+7;
     let get_id='#C'+nw_spot;
   let first_spot= document.querySelector(get_id);
@@ -162,6 +159,25 @@ function first_player_check_move(board){
   clone_obj.first=nw_spot;
   }
   
+
+// if(boardValue[board.position+7].checker=='X'){
+
+
+// }
+// else{
+
+
+// }
+
+  if(boardValue[board.position+7].checker=='X' && boardValue[board.position+14].checker=='' ){
+    
+    let nw_spot=board.position+14;
+    let get_id='#C'+nw_spot;
+  let first_spot= document.querySelector(get_id);
+  first_spot.classList.add('possible_move');
+  clone_obj.third=nw_spot;
+  }
+
   
   if(boardValue[board.position+9].checker=='' && boardValue[board.position+9].type==true){
     let ne_spot=board.position+9;
@@ -173,6 +189,17 @@ function first_player_check_move(board){
     this_spot.classList.add('current_move');
    clone_obj.second=ne_spot;
   
+  }
+
+
+
+  if(boardValue[board.position+9].checker=='X' && boardValue[board.position+18].checker=='' ){
+    
+    let nw_spot=board.position+18;
+    let get_id='#C'+nw_spot;
+  let first_spot= document.querySelector(get_id);
+  first_spot.classList.add('possible_move');
+  clone_obj.third=nw_spot;
   }
   
   setPotentialMove(clone_obj);
@@ -221,7 +248,6 @@ function second_player_check_move(board){
 
 
 	return	(
-
 
         <div class="container">
          <div class="theBoard"  >

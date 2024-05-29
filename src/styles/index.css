@@ -40,6 +40,9 @@ span{
   border: 1px solid red;
 }
 
+.landing_spot{
+  border: 1px solid red;
+}
 
 .current_move{
   border: 3px solid red;
