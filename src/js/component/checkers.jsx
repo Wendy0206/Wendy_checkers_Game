@@ -9,6 +9,8 @@ export const Checkers= ()=> {
     const [boardValue ,setBoardValue ]= useState([]);
     const [potentialMove, setPotentialMove]= useState({first:null, second:null, current: null});
     const [playerScore, setPlayerScore]= useState({player:0, playerM: 0, player2:0, player2M:0});
+    const [lastRecord, setLastRecord]= useState({player:0, playerM: 0, player2:0, player2M:0});
+    const [undoBoardValue ,setUndoBoardValue ]= useState([]);
 
     useEffect(()=>{
 
@@ -71,8 +73,10 @@ reset_board.push(newObj);
   }  
   console.log('This is our board position and data :');
   console.log(reset_board);
- 
+
+  setUndoBoardValue(reset_board);
 setBoardValue(reset_board);
+
 
 }
 
@@ -99,20 +103,24 @@ if(board.position==potentialMove.first || board.position==potentialMove.second){
 
 if(boardValue[potentialMove.current].checker=='O'){
   let clone_board= [...boardValue];
+  setUndoBoardValue(boardValue);
   clone_board[board.position].checker='O';
   clone_board[potentialMove.current].checker='';
   setBoardValue(clone_board);
   setCountMove(countMove+1);
+  setLastRecord(playerScore);
   let clone_player_score= {player: playerScore.player, playerM:playerScore.playerM+1 , player2: playerScore.player2, player2M:playerScore.player2M};
   setPlayerScore(clone_player_score);
  
 
 }else{
   let clone_board= [...boardValue];
+  setUndoBoardValue(boardValue);
   clone_board[board.position].checker='X';
   clone_board[potentialMove.current].checker='';
   setBoardValue(clone_board);
   setCountMove(countMove+1);
+  setLastRecord(playerScore);
   let clone_player_score= {player: playerScore.player, playerM:playerScore.playerM , player2: playerScore.player2, player2M:playerScore.player2M+1};
   setPlayerScore(clone_player_score);
  
@@ -131,20 +139,24 @@ if(board.position==potentialMove.third){
 
   if(boardValue[potentialMove.current].checker=='O'){
     let clone_board= [...boardValue];
+    setUndoBoardValue(boardValue);
     clone_board[board.position].checker='O';
     clone_board[potentialMove.current].checker='';
     clone_board[potentialMove.jump].checker='';
     setCountMove(countMove+1);
+    setLastRecord(playerScore);
    let clone_player_score= {player: playerScore.player+1, playerM:playerScore.playerM+1 , player2: playerScore.player2, player2M:playerScore.player2M};
   setPlayerScore(clone_player_score);
     setBoardValue(clone_board);
   
   }else{
     let clone_board= [...boardValue];
+    setUndoBoardValue(boardValue);
     clone_board[board.position].checker='X';
     clone_board[potentialMove.current].checker='';
     clone_board[potentialMove.jump].checker='';
     setCountMove(countMove+1);
+    setLastRecord(playerScore);
     let clone_player_score= {player: playerScore.player , playerM:playerScore.playerM,  player2: playerScore.player2+1,player2M:playerScore.player2M+1};
   setPlayerScore(clone_player_score);
     setBoardValue(clone_board);
@@ -315,7 +327,14 @@ clone_obj.jump= board.position-9;
 
 }
 
+function undo_function(){
+// setBoardValue(undoBoardValue);
+// setPlayerScore(lastRecord);
 
+console.log('this is the previous record : ')
+console.log(undoBoardValue)
+
+}
 
 
 	return	(
@@ -330,7 +349,8 @@ clone_obj.jump= board.position-9;
      
        </div>
 
-       <div className="score_div">
+<div >
+<div className="score_div">
 <h5> Player 1 : {playerScore.player}<br/>
 Move: {playerScore.playerM}<br/><br/>
   Player 2 : {playerScore.player2}<br/>
@@ -340,8 +360,11 @@ Move: {playerScore.playerM}<br/><br/>
 
 </h5>
 
-
        </div>
+
+<button className="btn btn-danger mt-3" onClick={()=>undo_function()}>Undo</button>
+
+</div>
 
 
   
