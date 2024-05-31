@@ -1,9 +1,5 @@
 
-body{
-background-color: white;
-margin-top: 2%;
 
-}
 .theBoard{
 
     width: 80%;
@@ -19,8 +15,8 @@ margin-top: 2%;
 
 span{
     display: inline-block;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     font-size: 60px;
     color: gray;  
     font-weight: 700;
