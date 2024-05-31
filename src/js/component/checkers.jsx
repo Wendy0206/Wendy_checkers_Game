@@ -360,7 +360,7 @@ export const Checkers = () => {
 
         </div>
 
-        <button className="btn btn-secondary mt-3 p-3" onClick={() => undo_function()}><i class="fa-solid fa-arrow-rotate-left fa-2xl"></i></button>
+        <button className="btn btn-secondary mt-3 p-3" onClick={() => undo_function()}><i class="fa-solid fa-arrow-rotate-left fa-2xl"></i></button><br/>
         <button className="btn btn-danger mt-3 p-3" onClick={() => initialize_board()}>Start over</button>
 
       </div>
