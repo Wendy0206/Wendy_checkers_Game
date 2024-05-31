@@ -9,7 +9,7 @@ export const Checkers = () => {
   const [undoBoardValue, setUndoBoardValue] = useState([]);
 
   const [boardValue, setBoardValue] = useState([]);
-  const [potentialMove, setPotentialMove] = useState({ first: null, second: null, third: null, current: null });
+  const [potentialMove, setPotentialMove] = useState({ first: null, second: null, third: null, fourth:null, jump:null, jump2:null, current: null });
   const [playerScore, setPlayerScore] = useState({ player: 0, playerM: 0, player2: 0, player2M: 0 });
   const [lastRecord, setLastRecord] = useState({});
 
@@ -83,6 +83,25 @@ export const Checkers = () => {
 
 
 
+// function check_whos_playing(board){
+
+//   if(playerScore.playerM==playerScore.player2M){
+//     if(boardValue[board.position].checker=='X' || potentialMove.current){
+//  Move_cell(board);
+//     }
+//     }
+  
+//     else{
+//       if(boardValue[board.position].checker=='O' || potentialMove.current){
+//      Move_cell(board)
+//       } 
+  
+//     }
+  
+// }
+
+
+
   function Move_cell(board) {
     // below we remove the potential css class that highlights your move
     let all_sqr = document.querySelectorAll('.possible_move');
@@ -100,11 +119,11 @@ export const Checkers = () => {
       }
     }
 
-
+ 
 
 
     // check if this move is the result of a potential clean move or an attempt to jump your opponent piece
-    if (board.position == potentialMove.first || board.position == potentialMove.second || board.position == potentialMove.third) {
+    if (board.position == potentialMove.first || board.position == potentialMove.second || board.position == potentialMove.third ||  board.position == potentialMove.fourth) {
       // below we get the current record for the undo function before we change it
       setLastRecord(playerScore);
     
@@ -126,6 +145,11 @@ export const Checkers = () => {
           clone_player_score.player = playerScore.player + 1;
         }
 
+        if (potentialMove.fourth) {
+          clone_board[potentialMove.jump2].checker = '';
+          clone_player_score.player2 ++;
+        }
+
       }
 
       // if it's the second player we do the same thing
@@ -140,12 +164,17 @@ export const Checkers = () => {
           clone_player_score.player2 = playerScore.player2 + 1;
         }
 
+        if (potentialMove.fourth) {
+          clone_board[potentialMove.jump2].checker = '';
+          clone_player_score.player2 ++;
+        }
+
       }
 
       setBoardValue(clone_board);
       setPlayerScore(clone_player_score);
       setCountMove(countMove + 1);
-      var clear_potential_move = { first: null, second: null, current: null };
+      var clear_potential_move = { first: null, second: null, third: null, fourth:null, jump:null, jump2:null, current: null };
       setPotentialMove(clear_potential_move);
       // console.log('this is our player score after move :', clone_player_score);
       return;
@@ -170,24 +199,12 @@ export const Checkers = () => {
   }
 
 
-  // if(countMove%2==0){
-  // if(boardValue[board.position].checker=='O'){
-  // first_player(board);
-  // }
-  // }
-
-  // else{
-  //   if(boardValue[board.position].checker=='X'){
-  //  second_player(board);
-  //   }
-
-  // }
 
 
 
   function first_player_check_move(board) {
     // ne= North East, nw= North West, sw = South West, se= South East
-    var clone_obj = { first: null, second: null, current: board.position };
+    var clone_obj = { first: null, second: null, third: null, fourth:null, jump:null, jump2:null, current: board.position };
 
     // check if you have your first clean move
     if (boardValue[board.position + 7].checker == '' && boardValue[board.position + 7].type == true) {
@@ -219,8 +236,6 @@ export const Checkers = () => {
         clone_obj.fourth = nw_spot;
         clone_obj.jump2 = board.position + 21;
       }
-  
-
 
 
     // check if you have a second clean move
@@ -236,7 +251,6 @@ export const Checkers = () => {
 
     }
 
-
     // check if your second move is a potential game
     if (boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18].checker == '') {
       let nw_spot = board.position + 18;
@@ -246,9 +260,6 @@ export const Checkers = () => {
       clone_obj.third = nw_spot;
       clone_obj.jump = board.position + 9;
     }
-
-
-
     
        // check if your first potential move is a double game
        if (boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18].checker =='' && boardValue[board.position + 27].checker =='X' && boardValue[board.position + 36].checker =='' ) { 
@@ -271,7 +282,7 @@ export const Checkers = () => {
   function second_player_check_move(board) {
 
     // ne= North East, nw= North West, sw = South West, se= South East
-    var clone_obj = { first: null, second: null, third:null, fourth:null, current: board.position };
+    var clone_obj = { first: null, second: null, third: null, fourth:null, jump:null, jump2:null, current: board.position };
 
     // check if our first move is clean
     if (boardValue[board.position - 7].checker == '' && boardValue[board.position - 7].type == true) {
@@ -294,7 +305,6 @@ export const Checkers = () => {
       first_spot.classList.add('possible_move');
       clone_obj.third = nw_spot;
       clone_obj.jump = board.position - 7;
-
       let current_spot = '#C' + board.position;
       let this_spot = document.querySelector(current_spot);
       this_spot.classList.add('current_move');
@@ -325,7 +335,6 @@ export const Checkers = () => {
       let this_spot = document.querySelector(current_spot);
       this_spot.classList.add('current_move');
       clone_obj.second = nw_spot;
-
     }
 
 
@@ -397,7 +406,7 @@ export const Checkers = () => {
       <div className="theBoard"  >
 
         {boardValue.slice(1).map((board, ind) =>
-          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board, e)}><span>{board.checker}</span></div>
+          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span>{board.checker}</span></div>
 
         )}
 
