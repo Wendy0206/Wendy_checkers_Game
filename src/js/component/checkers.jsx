@@ -1,4 +1,4 @@
-import { element } from "prop-types";
+
 import React from "react";
 import { useState, useEffect } from "react";
 
@@ -21,7 +21,6 @@ export const Checkers = () => {
 
 
   const initialize_board = () => {
-
     let reset_board = [{ classN: 'dark_brown', i: 0, checker: 'O' }, { classN: 'dark_brown', type: true, position: 1, checker: 'O', id: 'C1' }];
 
     for (let i = 2; i < 65; i++) {
@@ -72,10 +71,10 @@ export const Checkers = () => {
       reset_board.push(newObj);
 
     }
-    console.log('This is our board position and data :');
-    console.log(reset_board);
-
+  
     setBoardValue(reset_board);
+    console.log('This is our board position and data :');
+    console.log(reset_board.slice(1));
 
 
   }
@@ -104,10 +103,8 @@ export const Checkers = () => {
     // Our board is an array of object that store the position of each piece, 
     // everytime you click on a piece we highlight the potential moves and store them in a variable, 
     // later on when you try to move we check if it is one of the potential moves and we update the board but before we do,
-    //  we capture the value of the board before change it, therefore when you click on the undo button we can change boardvalue. 
-    //  with the UndoboardValue
- 
- 
+    //  we capture the value of the board before change, therefore when you click on the undo button we can change boardvalue state 
+    //  with the UndoboardValue which store the board value one move behind. 
  
     if (board.position == potentialMove.first || board.position == potentialMove.second) {
       setLastRecord(playerScore);
@@ -364,6 +361,7 @@ export const Checkers = () => {
         </div>
 
         <button className="btn btn-secondary mt-3 p-3" onClick={() => undo_function()}><i class="fa-solid fa-arrow-rotate-left fa-2xl"></i></button>
+        <button className="btn btn-danger mt-3 p-3" onClick={() => initialize_board()}>Start over</button>
 
       </div>
 
