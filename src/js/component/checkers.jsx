@@ -101,45 +101,54 @@ export const Checkers = () => {
   
 // }
 
+function remove_highlight(){
 
+  let all_sqr = document.querySelectorAll('.possible_move');
+  if (all_sqr) {
+    for (let i = 0; i < all_sqr.length; i++) {
+      all_sqr[i].classList.remove('possible_move');
+    }
+  }
+
+  let all_current = document.querySelectorAll('.theBoard>div');
+  if (all_current) {
+    for (let i = 0; i < all_current.length; i++) {
+      all_current[i].classList.remove('current_move');
+    }
+  }
+
+}
 
   function Move_cell(board) {
     // below we remove the potential css class that highlights your move
-    let all_sqr = document.querySelectorAll('.possible_move');
-    if (all_sqr) {
-      for (let i = 0; i < all_sqr.length; i++) {
-        all_sqr[i].classList.remove('possible_move');
-      }
-    }
-
-    let all_current = document.querySelectorAll('.theBoard>div');
-    if (all_current) {
-      for (let i = 0; i < all_current.length; i++) {
-        all_current[i].classList.remove('current_move');
-      }
-    }
-
- 
+remove_highlight();
 
 
     // check if this move is the result of a potential clean move or an attempt to jump your opponent piece
-    if (board.position == potentialMove.firstr || board.position == potentialMove.firstl || board.position == potentialMove.thirdr ||  board.position == potentialMove.thirdl) {
+    if (board.position == potentialMove.firstr || board.position == potentialMove.firstl || board.position == potentialMove.thirdr ||  board.position == potentialMove.thirdl || board.position == potentialMove.fourthl || board.position == potentialMove.fourthr || board.position == potentialMove.fourthld || board.position == potentialMove.fourthlu || board.position == potentialMove.fourthrd || board.position == potentialMove.fourthru) {
       // below we get the current record for the undo function before we change it
       setLastRecord(playerScore);
-    
-      // below we clone the board to make the changes
       let clone_board = [...boardValue];
+      // below we clone the board to make the changes
+  
 
-      // below we check the player
+           // set the new record for our dashboard
+      var clone_player_score = { player: playerScore.player, playerM: playerScore.playerM, player2: playerScore.player2, player2M: playerScore.player2M };
+
+      // below we check the player and move the piece from its initial spot to its final
       if (boardValue[potentialMove.current].checker == 'O') {
         // below we remove the piece in its previous position in put in the new spot
         clone_board[board.position].checker = 'O';
         clone_board[potentialMove.current].checker = '';
+       clone_player_score.playerM++;
+      }else {
+        clone_board[board.position].checker = 'X';
+        clone_board[potentialMove.current].checker = '';
+        clone_player_score.player2M++;
+      }
 
-        // set the new record for the dashboard
-        var clone_player_score = { player: playerScore.player, playerM: playerScore.playerM + 1, player2: playerScore.player2, player2M: playerScore.player2M };
-
-        // below we check if this was a jump to also remove the piece we jump and a 1 score to the player
+       
+        // below we check if this was a jump or double jump to also remove the piece we jump and add 1 score to the player
              if (potentialMove.thirdl == board.position) {
           clone_board[potentialMove.jumpl].checker = '';
           clone_player_score.player = playerScore.player + 1;
@@ -150,81 +159,41 @@ export const Checkers = () => {
         }
 
       else  if (potentialMove.fourthl == board.position) {
+        clone_board[potentialMove.jumpl].checker = '';
           clone_board[potentialMove.jump2l].checker = '';
-          clone_player_score.player2 ++;
+        
         }
 
       else  if (potentialMove.fourthr == board.position) {
+        clone_board[potentialMove.jumpr].checker = '';
           clone_board[potentialMove.jump2r].checker = '';
-          clone_player_score.player2 ++;
+          
         }
+
       else  if (potentialMove.fourthld == board.position) {
-          clone_board[potentialMove.jump2ld].checker = '';
-          clone_player_score.player2 ++;
+        clone_board[potentialMove.jumpl].checker = '';
+        clone_board[potentialMove.jump2ld].checker = '';
+          
         }
       else  if (potentialMove.fourthlu == board.position) {
+        clone_board[potentialMove.jumpl].checker = '';
           clone_board[potentialMove.jump2lu].checker = '';
-          clone_player_score.player2 ++;
+         
         }
         
 
      else   if (potentialMove.fourthrd == board.position) {
+      clone_board[potentialMove.jumpr].checker = '';
           clone_board[potentialMove.jump2rd].checker = '';
-          clone_player_score.player2 ++;
+          
         }
         
      else   if (potentialMove.fourthru == board.position) {
+      clone_board[potentialMove.jumpr].checker = '';
           clone_board[potentialMove.jump2ru].checker = '';
-          clone_player_score.player2 ++;
+         
         }
-      }
-
-      // if it's the second player we do the same thing
-      else {
-        var clone_player_score = { player: playerScore.player, playerM: playerScore.playerM, player2: playerScore.player2, player2M: playerScore.player2M + 1 };
-        clone_board[board.position].checker = 'X';
-        clone_board[potentialMove.current].checker = '';
-        // below we check if this was a jump to also remove the piece we jump and a 1 score to the player
-        if (potentialMove.thirdl) {
-          clone_board[potentialMove.jumpl].checker = '';
-          clone_player_score.player2 = playerScore.player + 1;
-        }
-        if (potentialMove.thirdr == board.position) {
-          clone_board[potentialMove.jumpr].checker = '';
-          clone_player_score.player2 = playerScore.player + 1;
-        }
-
-       else if (potentialMove.fourthl == board.position) {
-          clone_board[potentialMove.jump2l].checker = '';
-          clone_player_score.player2 ++;
-        }
-
-       else if (potentialMove.fourthr == board.position) {
-          clone_board[potentialMove.jump2r].checker = '';
-          clone_player_score.player2 ++;
-        
-        }
-       else if (potentialMove.fourthld == board.position) {
-          clone_board[potentialMove.jump2ld].checker = '';
-          clone_player_score.player2 ++;
-        }
-      else if (potentialMove.fourthlu == board.position) {
-          clone_board[potentialMove.jump2lu].checker = '';
-          clone_player_score.player2 ++;
-        }
-        
-      else if (potentialMove.fourthrd == board.position) {
-          clone_board[potentialMove.jump2rd].checker = '';
-          clone_player_score.player2 ++;
-       
-        }
-        
-      else if (potentialMove.fourthru  == board.position) {
-          clone_board[potentialMove.jump2ru].checker = '';
-          clone_player_score.player2 ++;
-        }
-
-      }
+    
 
       setBoardValue(clone_board);
       setPlayerScore(clone_player_score);
@@ -232,9 +201,10 @@ export const Checkers = () => {
       var clear_potential_move= {firstl: null, firstr: null, thirdr: null, thirdl: null, jumpr:null,jumpl:null, fourthl:null,fourthr:null,jump2r:null,jump2l:null, fourthlu:null, fourthld:null,fourthru:null, fourthrd:null,  jump2ld:null, jump2lu:null,  jump2rd:null, jump2ru:null,  current: null };
       setPotentialMove(clear_potential_move);
        return;
+      }
 
-    }
 
+    // it wasn't potential move taking place so the player is checking if he/she can move
     if (boardValue[board.position].checker) {
      
       if (boardValue[board.position].checker == 'O') {
@@ -248,6 +218,7 @@ export const Checkers = () => {
 
     }
   }
+
 
 
 
@@ -382,8 +353,6 @@ export const Checkers = () => {
       clone_obj.jump2ru = board.position + 11;
     }
 
-    setPotentialMove(clone_obj);
-console.log('this is the potential moves ', clone_obj);
     setPotentialMove(clone_obj);
     console.log('this is the potential move in our state : ', clone_obj);
 
@@ -526,53 +495,31 @@ console.log('this is the potential moves ', clone_obj);
       //this is the piece you jump
     clone_obj.jump2ld = board.position - 11;
   }
-
-
-setPotentialMove(clone_obj);
-console.log('this is the potential moves ', clone_obj);
-
     setPotentialMove(clone_obj);
     console.log('this is the potential move in our state : ', clone_obj);
-
   }
 
 
 
   function undo_function() {
+    
+// we check the countMove to make sure we don't do anything if you haven't done anything yet. 
+    if (countMove > 0) {
+// an undo basically sets the the game back by one move, to do this we set the Boardvalue with the undoBoardValue.
     // setBoardValue(undoBoardValue);
     setPlayerScore(lastRecord);
-
-    if (countMove > 0) {
       console.log('this is the previous record : ', boardValue)
       console.log('this is the previous record : '. undoBoardValue)
-
     }
 
   }
 
   function reset_board_function() {
-    let all_sqr = document.querySelectorAll('.possible_move');
-    if (all_sqr) {
-      for (let i = 0; i < all_sqr.length; i++) {
-        all_sqr[i].classList.remove('possible_move');
-      }
-    }
-
-    let all_current = document.querySelectorAll('.theBoard>div');
-    if (all_current) {
-      for (let i = 0; i < all_current.length; i++) {
-        all_current[i].classList.remove('current_move');
-
-      }
-    }
-
+    remove_highlight();
     initialize_board();
-
   }
 
-
   return (
-
     <div className="container d-flex pt-5">
       <div className="theBoard"  >
 
