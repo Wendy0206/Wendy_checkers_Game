@@ -17,9 +17,9 @@ span{
     display: inline-block;
     width: 80px;
     height: 80px;
-    font-size: 60px;
+    font-size: 30px;
     color: gray;  
-    font-weight: 700;
+    font-weight: 500;
     cursor: pointer;
 }
 
