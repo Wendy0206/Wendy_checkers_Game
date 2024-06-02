@@ -119,6 +119,14 @@ function remove_highlight(){
 
 }
 
+const get_board_record=()=>{
+  let boardSNapshot= boardValue.map((elm)=>elm);
+
+sessionStorage.setItem('undoboard', JSON.stringify(boardSNapshot));
+console.log('this is our board value before this move : ', boardSNapshot);
+}
+
+
   function Move_cell(board) {
     // below we remove the potential css class that highlights your move
 remove_highlight();
@@ -135,12 +143,17 @@ remove_highlight();
            // set the new record for our dashboard
       var clone_player_score = { player: playerScore.player, playerM: playerScore.playerM, player2: playerScore.player2, player2M: playerScore.player2M };
 
+
+       let which_player=false;
+       let which_score=0;
       // below we check the player and move the piece from its initial spot to its final
       if (boardValue[potentialMove.current].checker == 'O') {
         // below we remove the piece in its previous position in put in the new spot
         clone_board[board.position].checker = 'O';
         clone_board[potentialMove.current].checker = '';
        clone_player_score.playerM++;
+       which_player=true;
+      
       }else {
         clone_board[board.position].checker = 'X';
         clone_board[potentialMove.current].checker = '';
@@ -152,52 +165,63 @@ remove_highlight();
              if (potentialMove.thirdl == board.position) {
           clone_board[potentialMove.jumpl].checker = '';
           clone_player_score.player = playerScore.player + 1;
+          which_score=1;
         }
        else if (potentialMove.thirdr == board.position) {
           clone_board[potentialMove.jumpr].checker = '';
           clone_player_score.player = playerScore.player + 1;
+          which_score=1;
         }
 
       else  if (potentialMove.fourthl == board.position) {
         clone_board[potentialMove.jumpl].checker = '';
           clone_board[potentialMove.jump2l].checker = '';
-        
+          which_score=2;
         }
 
       else  if (potentialMove.fourthr == board.position) {
         clone_board[potentialMove.jumpr].checker = '';
           clone_board[potentialMove.jump2r].checker = '';
-          
+          which_score=2;
         }
 
       else  if (potentialMove.fourthld == board.position) {
         clone_board[potentialMove.jumpl].checker = '';
         clone_board[potentialMove.jump2ld].checker = '';
+        which_score=2;
           
         }
       else  if (potentialMove.fourthlu == board.position) {
         clone_board[potentialMove.jumpl].checker = '';
           clone_board[potentialMove.jump2lu].checker = '';
-         
+          which_score=2;
         }
         
 
-     else   if (potentialMove.fourthrd == board.position) {
+     else if (potentialMove.fourthrd == board.position) {
       clone_board[potentialMove.jumpr].checker = '';
           clone_board[potentialMove.jump2rd].checker = '';
-          
+          which_score=2;
         }
         
      else   if (potentialMove.fourthru == board.position) {
       clone_board[potentialMove.jumpr].checker = '';
           clone_board[potentialMove.jump2ru].checker = '';
-         
+          which_score=2;
         }
     
+        if(which_player){
+          clone_player_score.player=clone_player_score.player+ which_score;
+        }
+        else{
+          clone_player_score.player2=clone_player_score.player2+ which_score;
+        }
 
       setBoardValue(clone_board);
       setPlayerScore(clone_player_score);
       setCountMove(countMove + 1);
+
+      // reset the potential move obj
       var clear_potential_move= {firstl: null, firstr: null, thirdr: null, thirdl: null, jumpr:null,jumpl:null, fourthl:null,fourthr:null,jump2r:null,jump2l:null, fourthlu:null, fourthld:null,fourthru:null, fourthrd:null,  jump2ld:null, jump2lu:null,  jump2rd:null, jump2ru:null,  current: null };
       setPotentialMove(clear_potential_move);
        return;
@@ -293,7 +317,7 @@ remove_highlight();
     // now we're going to check the right side
 
     // check if you have a second clean move
-    if (boardValue[board.position + 9].checker == '' && boardValue[board.position + 9].type == true) {
+    if (boardValue[board.position + 9].checker == '' && boardValue[board.position + 9].type) {
       let new_spot = board.position + 9;
       let get_id = '#C' + new_spot;
       let second_spot = document.querySelector(get_id);
@@ -306,7 +330,7 @@ remove_highlight();
     }
 
     // check if your second move is a potential game
-    if (boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18].checker == '') {
+    if (boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18].checker == '' && boardValue[board.position + 18].type) {
       let nw_spot = board.position + 18;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -316,7 +340,7 @@ remove_highlight();
     }
     
        // check if your first potential move is a double game
-       if (boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18].checker =='' && boardValue[board.position + 27].checker =='X' && boardValue[board.position + 36].checker =='' ) { 
+       if (boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18].checker =='' && boardValue[board.position + 27].checker =='X' && boardValue[board.position + 36].checker =='' && boardValue[board.position + 36].type ) { 
         let nw_spot = board.position + 36;
         let get_id = '#C' + nw_spot;
         let first_spot = document.querySelector(get_id);
@@ -329,7 +353,7 @@ remove_highlight();
 
 
      // check if your first potential move is a double game down
-     if (boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18].checker =='' && boardValue[board.position + 25].checker =='X' && boardValue[board.position + 32].checker =='' ) { 
+     if (boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18].checker =='' && boardValue[board.position + 25].checker =='X' && boardValue[board.position + 32].checker =='' && boardValue[board.position + 32].type ) { 
       let nw_spot = board.position + 32;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -354,6 +378,7 @@ remove_highlight();
     }
 
     setPotentialMove(clone_obj);
+    get_board_record();
     console.log('this is the potential move in our state : ', clone_obj);
 
   }
@@ -430,7 +455,7 @@ remove_highlight();
          // this is where you land
         clone_obj.fourthrd = nw_spot;
         // this is the piece you jupm
-        clone_obj.jump2rd = board.position - 23;
+        clone_obj.jump2rd = board.position - 5;
       }
 
 
@@ -496,6 +521,7 @@ remove_highlight();
     clone_obj.jump2ld = board.position - 11;
   }
     setPotentialMove(clone_obj);
+    get_board_record();
     console.log('this is the potential move in our state : ', clone_obj);
   }
 
@@ -506,8 +532,11 @@ remove_highlight();
 // we check the countMove to make sure we don't do anything if you haven't done anything yet. 
     if (countMove > 0) {
 // an undo basically sets the the game back by one move, to do this we set the Boardvalue with the undoBoardValue.
-    // setBoardValue(undoBoardValue);
+let previous_board= sessionStorage.getItem('undoboard');
+setBoardValue(previous_board);
     setPlayerScore(lastRecord);
+    let clear_potential_move= {firstl: null, firstr: null, thirdr: null, thirdl: null, jumpr:null,jumpl:null, fourthl:null,fourthr:null,jump2r:null,jump2l:null, fourthlu:null, fourthld:null,fourthru:null, fourthrd:null,  jump2ld:null, jump2lu:null,  jump2rd:null, jump2ru:null,  current: null };
+    setPotentialMove(clear_potential_move);
       console.log('this is the previous record : ', boardValue)
       console.log('this is the previous record : '. undoBoardValue)
     }
@@ -524,7 +553,7 @@ remove_highlight();
       <div className="theBoard"  >
 
         {boardValue.slice(1).map((board, ind) =>
-          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span>{board.checker} </span></div>
+          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span>{board.checker}</span></div>
 
         )}
 
