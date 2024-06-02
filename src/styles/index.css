@@ -2,7 +2,7 @@
 
 .theBoard{
 
-    width: 80%;
+    width: 70%;
     height: 60vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -13,15 +13,17 @@
  
 }
 
+
+
 span{
     display: inline-block;
-    width: 80px;
-    height: 80px;
-    font-size: 60px;
+    width: 70px;
+    height: 70px;
+    font-size: 50px;
     color: gray;  
     font-weight: 700;
     cursor: pointer;
-
+  
 }
 
 .score_div{
@@ -38,7 +40,10 @@ span{
 
 .dark_brown{
     background-color: #6F4E37;
+  
 }
+
+
 
 .impossible_move{
   border: 1px solid red;
@@ -50,10 +55,7 @@ span{
 
 .current_move{
   border: 3px solid red;
- 
 }
-
-
 
 .possible_move{
   animation: blink 1.5s linear infinite;
@@ -75,4 +77,9 @@ span{
   75% {
     opacity: 0.5;
   }
+}
+
+@media screen and (max-width: 786px) {
+
+  
 }
