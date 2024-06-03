@@ -83,20 +83,20 @@ export const Checkers = () => {
 
 
 
-  function check_whos_playing(board){
+  function check_whos_playing(board) {
 
-    if(countMove%2==0){
-      if(boardValue[board.position].checker=='X' || potentialMove.current){
-   Move_cell(board);
+    if (countMove % 2 == 0) {
+      if (boardValue[board.position].checker == 'X' || potentialMove.current) {
+        Move_cell(board);
       }
+    }
+
+    else {
+      if (boardValue[board.position].checker == 'O' || potentialMove.current) {
+        Move_cell(board)
       }
 
-      else{
-        if(boardValue[board.position].checker=='O' || potentialMove.current){
-       Move_cell(board)
-        } 
-
-      }
+    }
 
   }
 
@@ -140,34 +140,21 @@ export const Checkers = () => {
       // set the new record for our dashboard
       var clone_player_score = { player: playerScore.player, playerM: playerScore.playerM, player2: playerScore.player2, player2M: playerScore.player2M };
 
+      let which_score = 0; // 1 or 2 or 3 depends on the move
 
-      let which_player = false;
-      let which_score = 0;
-      // below we check the player and move the piece from its initial spot to its final
-      if (boardValue[potentialMove.current].checker == 'O') {
-        // below we remove the piece in its previous position in put in the new spot
-        clone_board[board.position].checker = 'O';
-        clone_board[potentialMove.current].checker = '';
-        clone_player_score.playerM++;
-        which_player = true;
-
-      } else {
-        clone_board[board.position].checker = 'X';
-        clone_board[potentialMove.current].checker = '';
-        clone_player_score.player2M++;
-      }
-
-
-      // below we check if this was a jump or double jump to also remove the piece we jump and add 1 score to the player
+      // below we check if this was a jump or double jump to also remove the piece(s) we jump and add score to the player
       if (potentialMove.thirdl == board.position) {
         clone_board[potentialMove.jumpl].checker = '';
         clone_player_score.player = playerScore.player + 1;
+
         which_score = 1;
+        console.log('This is a test to see why the score is adding by 2 instead of one in thirdl ' + which_score);
       }
       else if (potentialMove.thirdr == board.position) {
         clone_board[potentialMove.jumpr].checker = '';
         clone_player_score.player = playerScore.player + 1;
         which_score = 1;
+        console.log('This is a test to see why the score is adding by 2 instead of one in thirdr ' + which_score);
       }
 
       else if (potentialMove.fourthl == board.position) {
@@ -194,7 +181,6 @@ export const Checkers = () => {
         which_score = 2;
       }
 
-
       else if (potentialMove.fourthrd == board.position) {
         clone_board[potentialMove.jumpr].checker = '';
         clone_board[potentialMove.jump2rd].checker = '';
@@ -207,15 +193,28 @@ export const Checkers = () => {
         which_score = 2;
       }
 
-      if (which_player) {
-        clone_player_score.player = clone_player_score.player + which_score;
-      }
-      else {
-        clone_player_score.player2 = clone_player_score.player2 + which_score;
+
+      // below we check the player and move the piece from its initial to its final position
+      if (boardValue[potentialMove.current].checker == 'O') {
+        clone_board[board.position].checker = 'O';
+        clone_board[potentialMove.current].checker = '';
+        clone_player_score.playerM++;
+        console.log('lets console log the score before add it to dashboard to see what is going on : ' + which_score)
+        clone_player_score.player = playerScore.player + which_score;
+      } else {
+        clone_board[board.position].checker = 'X';
+        clone_board[potentialMove.current].checker = '';
+        clone_player_score.player2M++;
+        clone_player_score.player2 = playerScore.player2 + which_score;
       }
 
+
+      // set the new board position
       setBoardValue(clone_board);
+      // set the new player score 
       setPlayerScore(clone_player_score);
+
+      // we count each moves which we use later to know whos playing, first player gets odd and second player gets even number
       setCountMove(countMove + 1);
 
       // reset the potential move obj
@@ -362,7 +361,7 @@ export const Checkers = () => {
     }
 
     // check if your first potential move is a double game
-    if (boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18].checker == '' &&  boardValue[board.position + 27].checker == 'X' && boardValue[board.position + 36].checker =='' && boardValue[board.position + 36].type==true) {
+    if (boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18].checker == '' && boardValue[board.position + 27].checker == 'X' && boardValue[board.position + 36]) {
       let nw_spot = board.position + 36;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -583,7 +582,7 @@ export const Checkers = () => {
 
         {boardValue.slice(1).map((board, ind) =>
           <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span>{board.checker}</span></div>
-
+          // const color = d.y >= 70 ? "green" : (d.y < 50 ? "red" : "yellow"); ternary with 3 conditions
         )}
 
       </div>
