@@ -593,12 +593,13 @@ if ((i - 1) % 8 == 0) {
       <div className="theBoard"  >
 
         {boardValue.slice(1).map((board, ind) =>
-          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span><p>{board.checker}</p> <i className={board.checker=='O'?"fa-solid fa-spider fa-2xl"  : (board.checker=='X' ? "fa-solid fa-mosquito fa-2xl": '')}></i></span></div>
+        // incon for king move
+          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span><p>{board.checker}</p> <i className={board.checker=='O'?"fa-solid fa-spider fa-2xl"  : (board.checker=='X' ? "fa-solid fa-mosquito fa-2xl text-dark": '')}></i></span></div>
             )}
 
       </div>
 
-      <div >
+      <div className="score_board" >
         <div className="score_div">
           <h5> Player 1 : {playerScore.player}<br />
             Move: {playerScore.playerM}<br /><br />

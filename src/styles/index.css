@@ -1,15 +1,14 @@
 
 
 .theBoard{
-
+  position: relative;
     width: 70%;
     height: 60vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr  1fr 1fr 1fr 1fr ;
     gap: 5px;
-    position: relative;
- margin: auto;
+  margin-right: 2%;
  
 }
 
@@ -24,10 +23,7 @@ span{
      color: white;
     cursor: pointer; 
     padding-top: 25px;
-
 }
-
-
 
 
 .score_div{
@@ -38,15 +34,20 @@ span{
   padding: 3px ;
 }
 
+
 .light_brown{
     background-color: #ECB176; 
 }
 
+
 .dark_brown{
-    background-color: #6F4E37;
-  
+    background-color: #6F4E37;  
 }
 
+
+.score_board{
+  width: 15%;
+}
 
 
 .impossible_move{
@@ -83,7 +84,3 @@ span{
   }
 }
 
-@media screen and (max-width: 786px) {
-
-  
-}
