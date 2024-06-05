@@ -6,8 +6,6 @@ import { useState, useEffect } from "react";
 
 export const Checkers = () => {
   const [countMove, setCountMove] = useState(0);
-  const [undoBoardValue, setUndoBoardValue] = useState([]);
-
   const [boardValue, setBoardValue] = useState([]);
   const [potentialMove, setPotentialMove] = useState({ firstl: null, firstr: null, thirdr: null, thirdl: null, jumpr: null, jumpl: null, fourthl: null, fourthr: null, jump2r: null, jump2l: null, fourthlu: null, fourthld: null, fourthru: null, fourthrd: null, jump2ld: null, jump2lu: null, jump2rd: null, jump2ru: null, current: null, current_player: null });
 
@@ -23,16 +21,20 @@ export const Checkers = () => {
 
   const initialize_board = () => {
 
-    // since an array start by default at 0, I ad a dummy object at index 0 so we can actually start at 1 to match the board movement. I also add the first one one
+    // since an array start by default at 0, I add a dummy object at index 0 so we can actually start at 1 to match the board movement. I also add the first one
     let reset_board = [{ classN: 'dark_brown', i: 0, checker: 'O' }, { classN: 'dark_brown', type: true, position: 1, checker: 'O', id: 'C1' }];
     for (let i = 2; i < 65; i++) {
       let newObj = {};
+   //   initialize the object with the empty square
       newObj.type = false;
       newObj.checker = '';
       newObj.id = 'C' + i;
       if (reset_board[i - 1].classN == 'dark_brown') {
+// the checkers board seems to be an  alternate series at first sight, you have it like black, white,black, white... but with one particularity 
+//every row should start with the end of the row above, that's why I use the Modulo 8 since it is a  8x8 board, therefore the index of the square at the end  modulo 8 is 0. 
 
-        if ((i - 1) % 8 == 0) {
+
+if ((i - 1) % 8 == 0) {
           newObj.classN = 'dark_brown';
           newObj.type = true;
           if (i < 24) {
@@ -252,8 +254,6 @@ export const Checkers = () => {
 
   function first_player_check_move(board) {
     var clone_obj = { firstl: null, firstr: null, thirdr: null, thirdl: null, jumpr: null, jumpl: null, fourthl: null, fourthr: null, jump2r: null, jump2l: null, fourthlu: null, fourthld: null, fourthru: null, fourthrd: null, jump2ld: null, jump2lu: null, jump2rd: null, jump2ru: null, current: board.position, current_player: board.checker };
-
-
     // check if you have your first clean move
     if (boardValue[board.position + 7].checker == '' && boardValue[board.position + 7].type == true) {
       let nw_spot = board.position + 7;
@@ -593,9 +593,8 @@ export const Checkers = () => {
       <div className="theBoard"  >
 
         {boardValue.slice(1).map((board, ind) =>
-          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span>{board.checker}</span></div>
-          // const color = d.y >= 70 ? "green" : (d.y < 50 ? "red" : "yellow"); ternary with 3 conditions
-        )}
+          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span><p>{board.checker}</p> <i className={board.checker=='O'?"fa-solid fa-spider fa-2xl"  : (board.checker=='X' ? "fa-solid fa-mosquito fa-2xl": '')}></i></span></div>
+            )}
 
       </div>
 

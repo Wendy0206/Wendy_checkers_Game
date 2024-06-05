@@ -13,21 +13,25 @@
  
 }
 
-
+span > p{
+display: none;
+}
 
 span{
     display: inline-block;
     width: 70px;
     height: 70px;
-    font-size: 50px;
-    color: gray;  
-    font-weight: 700;
-    cursor: pointer;
-  
+     color: white;
+    cursor: pointer; 
+    padding-top: 25px;
+
 }
 
+
+
+
 .score_div{
-  width: 150px;
+  width: 100%;
   height: fit-content;
   background-color: rgb(58, 56, 56);
   color: white;
