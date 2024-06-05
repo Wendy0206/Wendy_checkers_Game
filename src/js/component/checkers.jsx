@@ -268,7 +268,7 @@ export const Checkers = () => {
     }
 
     // check if your first potential move is a game
-    if (boardValue[board.position + 7].checker == 'X' && boardValue[board.position + 14].checker == '') {
+    if (boardValue[board.position + 7].checker == 'X' && boardValue[board.position + 14] && boardValue[board.position + 14].checker == '') {
       let nw_spot = board.position + 14;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -285,7 +285,7 @@ export const Checkers = () => {
 
 
     // check if your first potential move is a double game
-    if (boardValue[board.position + 7].checker == 'X' && boardValue[board.position + 14].checker == '' && boardValue[board.position + 21] && boardValue[board.position + 21].checker == 'X' && boardValue[board.position + 28] && boardValue[board.position + 28].checker == '' && boardValue[board.position + 28].type) {
+    if (boardValue[board.position + 7].checker == 'X' && boardValue[board.position + 14] && boardValue[board.position + 14].checker == '' && boardValue[board.position + 21] && boardValue[board.position + 21].checker == 'X' && boardValue[board.position + 28] && boardValue[board.position + 28].checker == '' && boardValue[board.position + 28].type) {
       let new_spot = board.position + 28;
       let get_id = '#C' + new_spot;
       let first_spot = document.querySelector(get_id);
@@ -444,7 +444,7 @@ export const Checkers = () => {
 
 
     // check if your first potential move is a game
-    if (boardValue[board.position - 7].checker == 'O' && boardValue[board.position - 14].checker == '' && boardValue[board.position - 14].type) {
+    if (boardValue[board.position - 7].checker == 'O' && boardValue[board.position - 14].type && boardValue[board.position - 14].checker == '' ) {
       let new_spot = board.position - 14;
       let get_id = '#C' + new_spot;
       let first_spot = document.querySelector(get_id);
@@ -463,7 +463,7 @@ export const Checkers = () => {
 
 
     // check if your first potential move is a double game
-    if (boardValue[board.position - 7].checker == 'O' && boardValue[board.position - 14].checker == '' && boardValue[board.position - 21].checker == 'O' && boardValue[board.position - 28].checker == '' && boardValue[board.position - 28].type) {
+    if (boardValue[board.position - 7].checker == 'O' && boardValue[board.position - 14].type && boardValue[board.position - 14].checker == '' && boardValue[board.position - 21].type && boardValue[board.position - 21].checker == 'O' && boardValue[board.position - 28].checker == '' && boardValue[board.position - 28].type) {
     console.log('this double game was called : line 469')
     
       let new_spot = board.position - 28;
@@ -542,7 +542,7 @@ export const Checkers = () => {
 
 
     // check if your second potential move is a double game UP
-    if (boardValue[board.position - 9].checker == 'O' && boardValue[board.position - 18].checker == '' && boardValue[board.position - 25].checker == 'O' && boardValue[board.position - 32] && boardValue[board.position - 32].checker == '') {
+    if (boardValue[board.position - 9].checker == 'O'  && boardValue[board.position - 18].type && boardValue[board.position - 18].checker == '' && boardValue[board.position - 25].type && boardValue[board.position - 25].checker == 'O' && boardValue[board.position - 32].type && boardValue[board.position - 32].checker == '') {
      console.log(' condition on line 544 was triggered')
       let nw_spot = board.position - 32;
       let get_id = '#C' + nw_spot;
