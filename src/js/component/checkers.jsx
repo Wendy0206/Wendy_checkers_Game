@@ -110,15 +110,21 @@ if ((i - 1) % 8 == 0) {
 
   function check_whos_playing(board) {
 
-    if (countMove % 2 == 0) {
-      if (boardValue[board.position].checker == 'X' || potentialMove.current) {
+    if (countMove % 2 != 0) {
+      if (boardValue[board.position].checker == 'X' || potentialMove.current_player=='X') {
         Move_cell(board);
+      }
+      else{
+        alert('it is not your turn');
       }
     }
 
     else {
-      if (boardValue[board.position].checker == 'O' || potentialMove.current) {
+      if (boardValue[board.position].checker == 'O' || potentialMove.current_player=='O') {
         Move_cell(board)
+      }
+      else{
+        alert('it is not your turn');
       }
 
     }
@@ -594,7 +600,7 @@ if ((i - 1) % 8 == 0) {
 
         {boardValue.slice(1).map((board, ind) =>
         // incon for king move
-          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span><p>{board.checker}</p> <i className={board.checker=='O'?"fa-solid fa-spider fa-2xl"  : (board.checker=='X' ? "fa-solid fa-mosquito fa-2xl text-dark": '')}></i></span></div>
+          <div key={ind} className={board.classN} id={board.id} onClick={(e) => check_whos_playing(board)}><span><p>{board.checker}</p> <i className={board.checker=='O'?"fa-solid fa-spider fa-2xl"  : (board.checker=='X' ? "fa-solid fa-mosquito fa-2xl text-dark": '')}></i></span></div>
             )}
 
       </div>
