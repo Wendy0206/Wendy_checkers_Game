@@ -21,7 +21,7 @@ export const Checkers = () => {
 
   const initialize_board = () => {
 
-    // since an array start by default at 0, I add a dummy object at index 0 so we can actually start at 1 to match the board movement. I also add the first one
+    // since an array  by default start at 0, I add a dummy object at index 0 so we can actually start at 1 to match the board movement. I also add the first one
     let reset_board = [{ classN: 'dark_brown', i: 0, checker: 'O' }, { classN: 'dark_brown', type: true, position: 1, checker: 'O', id: 'C1' }];
     for (let i = 2; i < 65; i++) {
       let newObj = {};
@@ -30,8 +30,8 @@ export const Checkers = () => {
       newObj.checker = '';
       newObj.id = 'C' + i;
       if (reset_board[i - 1].classN == 'dark_brown') {
-// the checkers board seems to be an  alternate series at first sight, you have it like black, white,black, white... but with one particularity 
-//every row should start with the end of the row above, that's why I use the Modulo 8 since it is a  8x8 board, therefore the index of the square at the end  modulo 8 is 0. 
+// the checkers board seems to be an alternate series at first sight, you have it like black, white,black, white... but with one particularity 
+//every row should start with the end of the row above, that's why I use the Modulo 8 since it is a  8x8 board, therefore the index of the square at the end modulo 8 will always be 0. 
 
 
 if ((i - 1) % 8 == 0) {
@@ -82,6 +82,7 @@ if ((i - 1) % 8 == 0) {
 
 
   }
+
 
   function remove_highlight() {
 
@@ -148,7 +149,6 @@ if ((i - 1) % 8 == 0) {
       let clone_board = [...boardValue];
 
 
-
       // set the new record for our dashboard
       var clone_player_score = { player: playerScore.player, playerM: playerScore.playerM, player2: playerScore.player2, player2M: playerScore.player2M };
 
@@ -204,21 +204,28 @@ if ((i - 1) % 8 == 0) {
 
       // below we check the player and move the piece from its initial to its final position
       if (boardValue[potentialMove.current].checker=='O') {
-        console.log('this if statement can be true for O ')
+    
         // where you land
         clone_board[board.position].checker = 'O';
         // where you come from
         clone_board[potentialMove.current].checker = '';
+
+           // we increment move for our dashboard
         clone_player_score.playerM++;
+
+        // and here we add the score
         clone_player_score.player = playerScore.player + which_score;
       } else {
-        console.log('this if statement cant be true X ');
-
+  
          // where you land
         clone_board[board.position].checker = 'X';
             // where you come from
-        clone_board[potentialMove.current].checker = '';        
+        clone_board[potentialMove.current].checker = '';  
+        
+        // we increment move for our dashboard
         clone_player_score.player2M++;
+
+        // and here we add the score
         clone_player_score.player2 = playerScore.player2 + which_score;
       }
 
@@ -238,7 +245,7 @@ if ((i - 1) % 8 == 0) {
     }
 
 
-    // it wasn't potential move taking place so the player is checking if he/she can move
+    // if it wasn't potential move taking place so the player is checking if he/she can move
     if (boardValue[board.position].checker) {
 
       if (boardValue[board.position].checker == 'O') {
@@ -588,6 +595,7 @@ if ((i - 1) % 8 == 0) {
       let previous_board = JSON.parse(sessionStorage.getItem('undoboard'));
       setBoardValue(previous_board);
       setPlayerScore(lastRecord);
+      setCountMove(countMove-1);
       let clear_potential_move = { firstl: null, firstr: null, thirdr: null, thirdl: null, jumpr: null, jumpl: null, fourthl: null, fourthr: null, jump2r: null, jump2l: null, fourthlu: null, fourthld: null, fourthru: null, fourthrd: null, jump2ld: null, jump2lu: null, jump2rd: null, jump2ru: null, current: null, current_player: null };
       setPotentialMove(clear_potential_move);
     }
