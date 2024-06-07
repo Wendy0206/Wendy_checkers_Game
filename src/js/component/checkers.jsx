@@ -109,37 +109,37 @@ export const Checkers = () => {
 
 
 
-  function check_whos_playing(board) {
+  // function check_whos_playing(board) {
 
-    if (countMove % 2== 0) {
+  //   if (countMove % 2== 0) {
 
-      if (boardValue[board.position].checker == 'O' || boardValue[board.position].checker == 'OK'  || potentialMove.current_player == 'OK' || potentialMove.current_player == 'O') {
+  //     if (boardValue[board.position].checker == 'O' || potentialMove.current_player == 'O') {
 
-          Move_cell(board);
-      }
-      else {
-        var clear_potential_move = {};
-    setPotentialMove(clear_potential_move);
-    remove_highlight();
-        alert('it is not your turn player X');
-      }
-    }
+  //         Move_cell(board);
+  //     }
+  //     else {
+  //       var clear_potential_move = {};
+  //   setPotentialMove(clear_potential_move);
+  //   remove_highlight();
+  //       alert('it is not your turn player X');
+  //     }
+  //   }
 
-    else {
-      if (boardValue[board.position].checker == 'X' || boardValue[board.position].checker == 'XK' || potentialMove.current_player== 'Xk' || potentialMove.current_player== 'X' ) {
+  //   else {
+  //     if (boardValue[board.position].checker == 'X' || potentialMove.current_player== 'X' ) {
   
-            Move_cell(board)
-      }
-      else {
-        var clear_potential_move = {};
-    setPotentialMove(clear_potential_move);
-    remove_highlight();
-        alert('it is not your turn player O');
-      }
+  //           Move_cell(board)
+  //     }
+  //     else {
+  //       var clear_potential_move = {};
+  //   setPotentialMove(clear_potential_move);
+  //   remove_highlight();
+  //       alert('it is not your turn player O');
+  //     }
 
-    }
+  //   }
 
-  }
+  // }
 
 function jump_move (board){
     // below we get the current record for the undo function before we change it
@@ -152,7 +152,6 @@ function jump_move (board){
     
     // set the new record for our dashboard
     var clone_player_score = { player: playerScore.player, playerM: playerScore.playerM, player2: playerScore.player2, player2M: playerScore.player2M };
-
     let which_score = 0; // 1 or 2 or 3 depends on the move
 
     // below we check if this was a jump or double jump to also remove the piece(s) we jump and add score to the player
@@ -203,76 +202,85 @@ function jump_move (board){
     }
 
 
-    // if (board.position == potentialMove.bthirdl ) {
-    //   clone_board[potentialMove.bjumpl].checker = '';
-    //   which_score = 1;
 
-    // }
-    // else if (board.position ==potentialMove.bthirdr) {
-    //   clone_board[potentialMove.bjumpr].checker = '';
-    //   which_score = 1;
-    // }
+ if (board.position == potentialMove.bthirdl ) {
+      clone_board[potentialMove.bjumpl].checker = '';
+      which_score = 1;
 
-    // else if (board.position == potentialMove.bfourthl ) {
-    //   clone_board[potentialMove.bjumpl].checker = '';
-    //   clone_board[potentialMove.bjump2l].checker = '';
-    //   which_score = 2;
-    // }
+    }
+    else if (board.position ==potentialMove.bthirdr) {
+      clone_board[potentialMove.bjumpr].checker = '';
+      which_score = 1;
+    }
 
-    // else if ( board.position == potentialMove.bfourthr) {
-    //   clone_board[potentialMove.bjumpr].checker = '';
-    //   clone_board[potentialMove.bjump2r].checker = '';
-    //   which_score = 2;
-    // }
+    else if (board.position == potentialMove.bfourthl ) {
+      clone_board[potentialMove.bjumpl].checker = '';
+      clone_board[potentialMove.bjump2l].checker = '';
+      which_score = 2;
+    }
 
-    // else if (board.position == potentialMove.bfourthld) {
-    //   clone_board[potentialMove.bjumpl].checker = '';
-    //   clone_board[potentialMove.bjump2ld].checker = '';
-    //   which_score = 2;
+    else if ( board.position == potentialMove.bfourthr) {
+      clone_board[potentialMove.bjumpr].checker = '';
+      clone_board[potentialMove.bjump2r].checker = '';
+      which_score = 2;
+    }
 
-    // }
-    // else if (board.position ==potentialMove.fourthlu) {
-    //   clone_board[potentialMove.bjumpl].checker = '';
-    //   clone_board[potentialMove.bjump2lu].checker = '';
-    //   which_score = 2;
-    // }
+    else if (board.position == potentialMove.bfourthld) {
+      clone_board[potentialMove.bjumpl].checker = '';
+      clone_board[potentialMove.bjump2ld].checker = '';
+      which_score = 2;
 
-    // else if (board.position == potentialMove.bfourthrd) {
-    //   clone_board[potentialMove.bjumpr].checker = '';
-    //   clone_board[potentialMove.bjump2rd].checker = '';
-    //   which_score = 2;
-    // }
+    }
+    else if (board.position ==potentialMove.fourthlu) {
+      clone_board[potentialMove.bjumpl].checker = '';
+      clone_board[potentialMove.bjump2lu].checker = '';
+      which_score = 2;
+    }
 
-    // else if (board.position == potentialMove.bfourthru) {
-    //   clone_board[potentialMove.bjumpr].checker = '';
-    //   clone_board[potentialMove.bjump2ru].checker = '';
-    //   which_score = 2;
-    // }
+    else if (board.position == potentialMove.bfourthrd) {
+      clone_board[potentialMove.bjumpr].checker = '';
+      clone_board[potentialMove.bjump2rd].checker = '';
+      which_score = 2;
+    }
 
+    else if (board.position == potentialMove.bfourthru) {
+      clone_board[potentialMove.bjumpr].checker = '';
+      clone_board[potentialMove.bjump2ru].checker = '';
+      which_score = 2;
+    }
+
+
+
+
+
+
+
+   
   
 
     // below we check the player and move the piece from its initial to its final position
-    if (boardValue[potentialMove.current].checker.charAt(0) == 'O') {
+    if (boardValue[potentialMove.current].checker== 'O') {
 
    // where you land
    clone_board[board.position].checker = 'O';
-   if(potentialMove.king_player){clone_board[board.position].checker = 'OK'};
+  //  if(potentialMove.king_player){clone_board[board.position].checker = 'OK'};
 
       // here we check if you land on the first line to become a king
-      if(board.position==64 || board.position==62 || board.position==60 || board.position==58 ){ clone_board[board.position].checker = 'OK';}
+     if(board.position==64 || board.position==62 || board.position==60 || board.position==58 ){ clone_board[board.position].checker = 'OK';}
 
       // we increment move for our dashboard
       clone_player_score.playerM++;
 
       // and here we add the score
       clone_player_score.player = playerScore.player + which_score;
-    } else if (boardValue[potentialMove.current].checker.charAt(0) == 'X') {
+    } else if (boardValue[potentialMove.current].checker == 'X') {
 
   // where you land
   clone_board[board.position].checker = 'X';
-  if(potentialMove.king_player){clone_board[board.position].checker = 'XK'};
+  // if(potentialMove.king_player){clone_board[board.position].checker = 'XK'};
+
       // here we check if you land on the first line to become a king
-      if(board.position==1 || board.position==3 || board.position==5 || board.position==7 ){ clone_board[board.position].checker = 'XK';}
+     if(board.position==1 || board.position==3 || board.position==5 || board.position==7 ){ clone_board[board.position].checker = 'XK';}
 
       // we increment move for our dashboard
       clone_player_score.player2M++;
@@ -305,12 +313,15 @@ function jump_move (board){
     // below we remove the potential css class that highlights the move
     remove_highlight();
     
-    // check if this move is the result of a potential clean move or an attempt to jump your opponent piece
-   if (Object.keys(potentialMove).length>2 && board.type && board.checker=='') {
-jump_move(board);
-return;
-    
+    if(board.checker==''){
+ // check if this move is the result of a potential clean move or an attempt to jump your opponent piece
+ if (potentialMove.firstl || potentialMove.firstr || potentialMove.jumpl |  potentialMove.jumpr ||  potentialMove.jump2l ||  potentialMove.jump2r ||  potentialMove.jump2ld || potentialMove.jump2lu || potentialMove.jump2rd || potentialMove.jump2ru || potentialMove.bfirstl || potentialMove.bfirstr || potentialMove.bjumpl |  potentialMove.bjumpr ||  potentialMove.bjump2l ||  potentialMove.bjump2r ||  potentialMove.bjump2ld || potentialMove.bjump2lu || potentialMove.bjump2rd || potentialMove.bjump2ru  ) {
+  jump_move(board);
+  return;
+
+      }
     }
+   
 
 
     // if it wasn't potential move taking place so the player is checking if he/she can move
@@ -344,7 +355,7 @@ king_check_move(board);
     // var clone_obj = { firstl: null, firstr: null, thirdr: null, thirdl: null, jumpr: null, jumpl: null, fourthl: null, fourthr: null, jump2r: null, jump2l: null, fourthlu: null, fourthld: null, fourthru: null, fourthrd: null, jump2ld: null, jump2lu: null, jump2rd: null, jump2ru: null, current: board.position, current_player: board.checker };
 
     var clone_obj = { current: board.position, current_player: board.checker};
-
+let opponent='X';
     // check if you have your first clean move
     if (boardValue[board.position + 7] && boardValue[board.position + 7].checker == '' && boardValue[board.position + 7].type == true) {
       let nw_spot = board.position + 7;
@@ -357,7 +368,7 @@ king_check_move(board);
     }
 
     // check if your first potential move is a game
-    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker == 'X' && boardValue[board.position + 14] && boardValue[board.position + 14].type && boardValue[board.position + 14].checker == '') {
+    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker == opponent && boardValue[board.position + 14] && boardValue[board.position + 14].type && boardValue[board.position + 14].checker == '') {
       let nw_spot = board.position + 14;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -371,7 +382,7 @@ king_check_move(board);
 
 
     // check if your first potential move is a double game
-    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker == 'X' && boardValue[board.position + 14] && boardValue[board.position + 14].type && boardValue[board.position + 14].checker == '' && boardValue[board.position + 21] && boardValue[board.position + 21].checker == 'X' && boardValue[board.position + 28] && boardValue[board.position + 28].checker == '' && boardValue[board.position + 28].type) {
+    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker == opponent && boardValue[board.position + 14] && boardValue[board.position + 14].type && boardValue[board.position + 14].checker == '' && boardValue[board.position + 21] && boardValue[board.position + 21].checker == opponent && boardValue[board.position + 28] && boardValue[board.position + 28].checker == '' && boardValue[board.position + 28].type) {
       let new_spot = board.position + 28;
       let get_id = '#C' + new_spot;
       let first_spot = document.querySelector(get_id);
@@ -384,7 +395,7 @@ king_check_move(board);
     }
 
     // check if your first potential move is a double  game down
-    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker == 'X' && boardValue[board.position + 14] && boardValue[board.position + 14].type && boardValue[board.position + 14].checker == '' && boardValue[board.position + 23] && boardValue[board.position + 23].checker == 'X' && boardValue[board.position + 32] && boardValue[board.position + 32].checker == '' && boardValue[board.position + 32].type) {
+    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker == opponent && boardValue[board.position + 14] && boardValue[board.position + 14].type && boardValue[board.position + 14].checker == '' && boardValue[board.position + 23] && boardValue[board.position + 23].checker == opponent && boardValue[board.position + 32] && boardValue[board.position + 32].checker == '' && boardValue[board.position + 32].type) {
       let nw_spot = board.position + 32;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -398,7 +409,7 @@ king_check_move(board);
 
 
     // check if your first potential move is a double up game
-    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker == 'X' && boardValue[board.position + 14] && boardValue[board.position + 14].checker == '' && boardValue[board.position + 5] && boardValue[board.position + 5].checker == 'X' && boardValue[board.position - 4] && boardValue[board.position - 4].checker == '' && boardValue[board.position - 4].type) {
+    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker == opponent && boardValue[board.position + 14] && boardValue[board.position + 14].checker == '' && boardValue[board.position + 5] && boardValue[board.position + 5].checker == opponent && boardValue[board.position - 4] && boardValue[board.position - 4].checker == '' && boardValue[board.position - 4].type) {
       let nw_spot = board.position - 4;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -424,7 +435,7 @@ king_check_move(board);
     }
 
     // check if your second move is a potential game
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '') {
+    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '') {
       let nw_spot = board.position + 18;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -435,7 +446,7 @@ king_check_move(board);
     }
 
     // check if your first potential move is a double game
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 27] && boardValue[board.position + 27].checker == 'X' && boardValue[board.position + 36] && boardValue[board.position + 36].checker == '' && boardValue[board.position + 36].type) {
+    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 27] && boardValue[board.position + 27].checker == opponent && boardValue[board.position + 36] && boardValue[board.position + 36].checker == '' && boardValue[board.position + 36].type) {
       let nw_spot = board.position + 36;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -449,7 +460,7 @@ king_check_move(board);
 
 
     // check if your first potential move is a double game down
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 25] && boardValue[board.position + 25].checker == 'X' && boardValue[board.position + 32] && boardValue[board.position + 32].checker == '') {
+    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 25] && boardValue[board.position + 25].checker == opponent && boardValue[board.position + 32] && boardValue[board.position + 32].checker == '') {
       let nw_spot = board.position + 32;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -462,7 +473,7 @@ king_check_move(board);
     }
 
     // check if your first potential move is a double game up
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker == 'X' && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 11].checker == 'X' && boardValue[board.position + 4].checker == '' && boardValue[board.position + 4].type == true) {
+    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 11].checker == opponent && boardValue[board.position + 4].checker == '' && boardValue[board.position + 4].type == true) {
       let nw_spot = board.position + 4;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -482,279 +493,8 @@ king_check_move(board);
 
 
   function second_player_check_move(board) {
-
+let opponent= 'O'
       var clone_obj = { current: board.position, current_player: board.checker}
-
-    // check if our first move is clean
-    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker == '' && boardValue[board.position - 7].type == true) {
-      let new_spot = board.position - 7;
-      let get_id = '#C' + new_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-      clone_obj.firstr = new_spot;
-    }
-
-
-    // check if your first potential move is a game
-    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker == 'O'  && boardValue[board.position - 14] && boardValue[board.position - 14].type && boardValue[board.position - 14].checker == '') {
-      let new_spot = board.position - 14;
-      let get_id = '#C' + new_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-
-      // this is where you land
-      clone_obj.thirdr = new_spot;
-      // this is the piece you're jumping
-      clone_obj.jumpr = board.position - 7;
-    }
-
-
-    // check if your first potential move is a double game
-    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker == 'O'  && boardValue[board.position - 14] && boardValue[board.position - 14].type && boardValue[board.position - 14].checker == '' && boardValue[board.position - 21] && boardValue[board.position - 21].checker == 'O' && boardValue[board.position - 28] && boardValue[board.position - 28].checker == '' && boardValue[board.position - 28].type) {
-        let new_spot = board.position - 28;
-      let get_id = '#C' + new_spot;
-      let second_spot = document.querySelector(get_id);
-      second_spot.classList.add('possible_move');
-      // this is where you land
-      clone_obj.fourthr = new_spot;
-      // this is the piece you jump
-      clone_obj.jump2r = board.position - 21;
-    }
-
-    // check if your first potential move is a double game up
-    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker == 'O'  && boardValue[board.position - 14]  && boardValue[board.position - 14].checker == '' && boardValue[board.position - 23] && boardValue[board.position - 23].type && boardValue[board.position - 23].checker == 'O' && boardValue[board.position - 32] && boardValue[board.position - 32].checker == '' ) {
-      let new_spot = board.position - 32;
-      let get_id = '#C' + new_spot;
-      let second_spot = document.querySelector(get_id);
-      second_spot.classList.add('possible_move');
-      // this is where you land
-      clone_obj.fourthru = new_spot;
-      // this is the piece you jump
-      clone_obj.jump2ru = board.position - 23;
-    }
-
-    // check if your first potential move is a double game down
-    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker == 'O' && boardValue[board.position - 14] && boardValue[board.position - 14].checker == '' && boardValue[board.position - 5] && boardValue[board.position - 5].checker == 'O' && boardValue[board.position + 4] && boardValue[board.position + 4].checker == '' && boardValue[board.position + 4].type) {
-      let nw_spot = board.position + 4;
-      let get_id = '#C' + nw_spot;
-      let second_spot = document.querySelector(get_id);
-      second_spot.classList.add('possible_move');
-      // this is where you land
-      clone_obj.fourthrd = nw_spot;
-      // this is the piece you jupm
-      clone_obj.jump2rd = board.position - 5;
-    }
-
-    // check your second potential move is clean
-    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker == '' && boardValue[board.position - 9].type) {
-      let nw_spot = board.position - 9;
-      let get_id = '#C' + nw_spot;
-      let second_spot = document.querySelector(get_id);
-      second_spot.classList.add('possible_move');
-
-      // this is where you land
-      clone_obj.firstl = nw_spot;
-    }
-
-
-    // check if your second potential move is a game
-    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker == 'O' && boardValue[board.position - 18] && boardValue[board.position - 18].checker == '' && boardValue[board.position - 18] && boardValue[board.position - 18].type) {
-      let nw_spot = board.position - 18;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-      // this is where you land
-      clone_obj.thirdl = nw_spot;
-      // this is the piece you jump
-      clone_obj.jumpl = board.position - 9;
-    }
-
-    // check if your second potential move is a double game
-    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker == 'O' && boardValue[board.position - 18] && boardValue[board.position - 18].checker == '' && boardValue[board.position - 27] && boardValue[board.position - 27].checker == 'O' && boardValue[board.position - 36] && boardValue[board.position - 36].checker == '' && boardValue[board.position - 36].type) {
-
-      let nw_spot = board.position - 36;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-      clone_obj.fourthl = nw_spot;
-      clone_obj.jump2l = board.position - 27;
-    }
-
-
-    // check if your second potential move is a double game UP
-    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker == 'O' && boardValue[board.position - 18] && boardValue[board.position - 18].type && boardValue[board.position - 18].checker == '' && boardValue[board.position - 25] && boardValue[board.position - 25].type && boardValue[board.position - 25].checker == 'O' && boardValue[board.position - 32] && boardValue[board.position - 32].type && boardValue[board.position - 32].checker == '') {
-      let nw_spot = board.position - 32;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-      // this is where you land
-      clone_obj.fourthlu = nw_spot;
-      // this is the piece you jump
-      clone_obj.jump2lu = board.position - 25;
-    }
-
-    // check if your second potential move is a double game Down
-    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker == 'O' && boardValue[board.position - 18]  && boardValue[board.position - 18] && boardValue[board.position - 18].checker == '' && boardValue[board.position - 11].checker == 'O' && boardValue[board.position - 4].checker == '' && boardValue[board.position - 4].type == true) {
-      let nw_spot = board.position - 4;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-      // this is where you land
-      clone_obj.fourthld = nw_spot;
-      //this is the piece you jump
-      clone_obj.jump2ld = board.position - 11;
-    }
-    setPotentialMove(clone_obj);
-    get_board_record();
-    console.log('this is the potential move in our state : ', clone_obj);
-  }
-
-
-  function king_check_move(board) {
- 
-    var clone_obj = { current: board.position, current_player: board.checker, king_player:true };
-
-    let opponent = 'X';
-    if (board.checker.charAt(0) == 'X') {
-      opponent = 'O';
-    }
-
-
-
-    // remember the king can move/jump backward
-
-    // check if you have your first clean move
-    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker == '' && boardValue[board.position + 7].type == true) {
-      let nw_spot = board.position + 7;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-      clone_obj.firstl = nw_spot;
-    }
-
-
-    // check if your first potential move is a game
-    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker.charAt(0) == opponent && boardValue[board.position + 14] && boardValue[board.position + 14].checker == '') {
-      let nw_spot = board.position + 14;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-
-      //this is where you land
-      clone_obj.thirdl = nw_spot;
-      // this is the piece you jump
-      clone_obj.jumpl = board.position + 7;
-    }
-
-
-    // check if your first potential move is a double game
-    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker.charAt(0) == opponent && boardValue[board.position + 14] && boardValue[board.position + 14].checker.charAt(0) == opponent && boardValue[board.position + 21] && boardValue[board.position + 21].checker == 'X' && boardValue[board.position + 28] && boardValue[board.position + 28].checker == '' && boardValue[board.position + 28].type) {
-      let new_spot = board.position + 28;
-      let get_id = '#C' + new_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-      //this is where you land
-      clone_obj.fourthl = new_spot;
-      // this is the piece you jump
-      clone_obj.jump2l = board.position + 21;
-    }
-
-
-    // check if your first potential move is a double  game down
-    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker.charAt(0) == opponent && boardValue[board.position + 14].checker == '' && boardValue[board.position + 23] && boardValue[board.position + 23].checker.charAt(0) == opponent && boardValue[board.position + 32] && boardValue[board.position + 32].checker == '' && boardValue[board.position + 32].type) {
-      let nw_spot = board.position + 32;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-
-      // this is where you land
-      clone_obj.fourthld = nw_spot;
-      // this is the piece you jump
-      clone_obj.jump2ld = board.position + 23;
-    }
-
-
-    // check if your first potential move is a double up game
-    if (boardValue[board.position + 7] && boardValue[board.position + 7].checker== opponent && boardValue[board.position + 14].checker == '' && boardValue[board.position + 5] && boardValue[board.position + 5].checker.charAt(0) == opponent && boardValue[board.position - 4] && boardValue[board.position - 4].checker == '' && boardValue[board.position - 4].type) {
-      let nw_spot = board.position - 4;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-
-      // this is where you land
-      clone_obj.fourthlu = nw_spot;
-      // this is the piece you jump
-      clone_obj.jump2lu = board.position + 5;
-    }
-
-
-    // now we're going to check the right side
-
-    // check if you have a second clean move
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker == '' && boardValue[board.position + 9].type) {
-      let new_spot = board.position + 9;
-      let get_id = '#C' + new_spot;
-      let second_spot = document.querySelector(get_id);
-      second_spot.classList.add('possible_move');
-      clone_obj.firstr = new_spot;
-
-    }
-
-    // check if your second move is a potential game
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '') {
-      let nw_spot = board.position + 18;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-      clone_obj.thirdr = nw_spot;
-      clone_obj.jumpr = board.position + 9;
-    }
-
-    // check if your first potential move is a double game
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18].checker == '' && boardValue[board.position + 27].checker.charAt(0) == opponent && boardValue[board.position + 36] && boardValue[board.position + 36].checker == '' && boardValue[board.position + 36].type) {
-      let nw_spot = board.position + 36;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-
-      // this is where you land
-      clone_obj.fourthr = nw_spot;
-      // this is the piece you jump
-      clone_obj.jump2r = board.position + 27;
-    }
-
-
-    // check if your first potential move is a double game down
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18].checker == '' && boardValue[board.position + 25].checker.charAt(0) == opponent && boardValue[board.position + 32] && boardValue[board.position + 32].checker == '') {
-      let nw_spot = board.position + 32;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-
-      // this is where you land
-      clone_obj.fourthrd = nw_spot;
-      // this is where you jump
-      clone_obj.jump2rd = board.position + 25;
-    }
-
-
-    // check if your first potential move is a double game up
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18].checker == '' && boardValue[board.position + 11].checker.charAt(0) == opponent && boardValue[board.position + 4].checker == '' && boardValue[board.position + 4].type == true) {
-      let nw_spot = board.position + 4;
-      let get_id = '#C' + nw_spot;
-      let first_spot = document.querySelector(get_id);
-      first_spot.classList.add('possible_move');
-
-      // this is where you land
-      clone_obj.fourthru = nw_spot;
-      // this is where you jump
-      clone_obj.jump2ru = board.position + 11;
-    }
-
-
-
-    // check the backward moves 
-
 
     // check if our first move is clean
     if (boardValue[board.position - 7] && boardValue[board.position - 7].checker == '' && boardValue[board.position - 7].type == true) {
@@ -767,7 +507,7 @@ king_check_move(board);
 
 
     // check if your first potential move is a game
-    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker.charAt(0) == opponent  && boardValue[board.position - 14] &&  boardValue[board.position - 14].type && boardValue[board.position - 14].checker == '') {
+    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker == opponent  && boardValue[board.position - 14] && boardValue[board.position - 14].type && boardValue[board.position - 14].checker == '') {
       let new_spot = board.position - 14;
       let get_id = '#C' + new_spot;
       let first_spot = document.querySelector(get_id);
@@ -781,8 +521,8 @@ king_check_move(board);
 
 
     // check if your first potential move is a double game
-    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker.charAt(0) == opponent  && boardValue[board.position - 14] && boardValue[board.position - 14].type && boardValue[board.position - 14].checker == ''  && boardValue[board.position - 21] && boardValue[board.position - 21].type && boardValue[board.position - 21].checker.charAt(0) == opponent && boardValue[board.position - 28].checker == '' && boardValue[board.position - 28].type) {
-      let new_spot = board.position - 28;
+    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker == opponent  && boardValue[board.position - 14] && boardValue[board.position - 14].type && boardValue[board.position - 14].checker == '' && boardValue[board.position - 21] && boardValue[board.position - 21].checker == opponent && boardValue[board.position - 28] && boardValue[board.position - 28].checker == '' && boardValue[board.position - 28].type) {
+        let new_spot = board.position - 28;
       let get_id = '#C' + new_spot;
       let second_spot = document.querySelector(get_id);
       second_spot.classList.add('possible_move');
@@ -793,7 +533,7 @@ king_check_move(board);
     }
 
     // check if your first potential move is a double game up
-    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker.charAt(0) == opponent && boardValue[board.position - 14] && boardValue[board.position - 14].checker == '' && boardValue[board.position - 23] && boardValue[board.position - 23].checker.charAt(0) == opponent && boardValue[board.position - 32] && boardValue[board.position - 32].checker == '' && boardValue[board.position - 32]) {
+    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker == opponent  && boardValue[board.position - 14]  && boardValue[board.position - 14].checker == '' && boardValue[board.position - 23] && boardValue[board.position - 23].type && boardValue[board.position - 23].checker == opponent && boardValue[board.position - 32] && boardValue[board.position - 32].checker == '' ) {
       let new_spot = board.position - 32;
       let get_id = '#C' + new_spot;
       let second_spot = document.querySelector(get_id);
@@ -805,14 +545,14 @@ king_check_move(board);
     }
 
     // check if your first potential move is a double game down
-    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker.charAt(0) == opponent  && boardValue[board.position - 14] && boardValue[board.position - 14].checker == '' && boardValue[board.position - 5] && boardValue[board.position - 5].checker.charAt(0) == opponent  && boardValue[board.position + 4] && boardValue[board.position + 4].checker == '' && boardValue[board.position + 4].type) {
+    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker == opponent && boardValue[board.position - 14] && boardValue[board.position - 14].checker == '' && boardValue[board.position - 5] && boardValue[board.position - 5].checker == opponent && boardValue[board.position + 4] && boardValue[board.position + 4].checker == '' && boardValue[board.position + 4].type) {
       let nw_spot = board.position + 4;
       let get_id = '#C' + nw_spot;
       let second_spot = document.querySelector(get_id);
       second_spot.classList.add('possible_move');
       // this is where you land
       clone_obj.bfourthrd = nw_spot;
-      // this is the piece you jump
+      // this is the piece you jupm
       clone_obj.bjump2rd = board.position - 5;
     }
 
@@ -829,7 +569,7 @@ king_check_move(board);
 
 
     // check if your second potential move is a game
-    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker.charAt(0) == opponent && boardValue[board.position - 18] && boardValue[board.position - 18].checker == '' && boardValue[board.position - 18].type) {
+    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker == opponent && boardValue[board.position - 18] && boardValue[board.position - 18].checker == '' && boardValue[board.position - 18] && boardValue[board.position - 18].type) {
       let nw_spot = board.position - 18;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -841,7 +581,7 @@ king_check_move(board);
     }
 
     // check if your second potential move is a double game
-    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker.charAt(0) == opponent && boardValue[board.position - 18].checker == '' && boardValue[board.position - 27].checker.charAt(0) == opponent && boardValue[board.position - 36] && boardValue[board.position - 36].checker == '' && boardValue[board.position - 36].type) {
+    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker == opponent && boardValue[board.position - 18] && boardValue[board.position - 18].checker == '' && boardValue[board.position - 27] && boardValue[board.position - 27].checker == opponent && boardValue[board.position - 36] && boardValue[board.position - 36].checker == '' && boardValue[board.position - 36].type) {
 
       let nw_spot = board.position - 36;
       let get_id = '#C' + nw_spot;
@@ -853,7 +593,7 @@ king_check_move(board);
 
 
     // check if your second potential move is a double game UP
-    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker.charAt(0) == opponent && boardValue[board.position - 18].type && boardValue[board.position - 18].checker == ''  && boardValue[board.position - 25] && boardValue[board.position - 25].type && boardValue[board.position - 25].checker.charAt(0) == opponent && boardValue[board.position - 32] && boardValue[board.position - 32].type && boardValue[board.position - 32].checker == '') {
+    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker == opponent && boardValue[board.position - 18] && boardValue[board.position - 18].type && boardValue[board.position - 18].checker == '' && boardValue[board.position - 25] && boardValue[board.position - 25].type && boardValue[board.position - 25].checker == opponent && boardValue[board.position - 32] && boardValue[board.position - 32].type && boardValue[board.position - 32].checker == '') {
       let nw_spot = board.position - 32;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -865,7 +605,7 @@ king_check_move(board);
     }
 
     // check if your second potential move is a double game Down
-    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker.charAt(0) == opponent && boardValue[board.position - 18] && boardValue[board.position - 18].checker == '' && boardValue[board.position - 11] && boardValue[board.position - 11].checker.charAt(0) == opponent && boardValue[board.position - 4] && boardValue[board.position - 4].checker == '' && boardValue[board.position - 4].type == true) {
+    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker == opponent && boardValue[board.position - 18]  && boardValue[board.position - 18] && boardValue[board.position - 18].checker == '' && boardValue[board.position - 11].checker == opponent && boardValue[board.position - 4].checker == '' && boardValue[board.position - 4].type == true) {
       let nw_spot = board.position - 4;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -875,6 +615,21 @@ king_check_move(board);
       //this is the piece you jump
       clone_obj.bjump2ld = board.position - 11;
     }
+    setPotentialMove(clone_obj);
+    get_board_record();
+    console.log('this is the potential move in our state : ', clone_obj);
+  }
+
+
+  function king_check_move(board) {
+ 
+    var clone_obj = { current: board.position, current_player: board.checker, king_player:true };
+
+    let opponent = 'X';
+    if (board.checker.charAt(0) == 'X') {
+      opponent = 'O';
+    }
+
 
 
     setPotentialMove(clone_obj);
@@ -906,7 +661,7 @@ king_check_move(board);
 
         {boardValue.slice(1).map((board, ind) =>
           // icon for king move <i class="fa-solid fa-crown"></i>
-          <div key={ind} className={board.classN} id={board.id} onClick={(e) => check_whos_playing(board)}><span><p>{board.checker}</p> <i className={board.checker == 'O' ? "fa-solid fa-spider fa-2xl" : board.checker == 'X' ? "fa-solid fa-mosquito fa-2xl text-dark" : board.checker == 'XK' ? "fa-solid fa-crown fa-2xl black_king":  board.checker == 'OK' ? "fa-solid fa-chess-queen fa-2xl": " "}></i></span></div>
+          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span><p>{board.checker}</p> <i className={board.checker == 'O' ? "fa-solid fa-spider fa-2xl" : board.checker == 'X' ? "fa-solid fa-mosquito fa-2xl text-dark" : board.checker == 'XK' ? "fa-solid fa-crown fa-2xl black_king":  board.checker == 'OK' ? "fa-solid fa-chess-queen fa-2xl": " "}></i></span></div>
         )}
       </div>
 
@@ -923,6 +678,7 @@ king_check_move(board);
         <button className="btn btn-secondary mt-3 p-3" onClick={() => undo_function()}><i className="fa-solid fa-arrow-rotate-left fa-2xl"></i></button><br />
         <button className="btn btn-danger mt-3 p-3" onClick={() => {
           remove_highlight();
+          setPotentialMove({});
           initialize_board();
         }}><h5>Start over</h5></button>
 
