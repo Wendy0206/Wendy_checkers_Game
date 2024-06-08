@@ -313,7 +313,7 @@ export const Checkers = () => {
       initialize_board();
     setPotentialMove({});
     dialog.showModal();
-    
+    return;
     }
 
     const potentialPositions = [
