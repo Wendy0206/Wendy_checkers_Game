@@ -694,7 +694,9 @@ export const Checkers = () => {
 
 
   return (
-    <div className="container d-flex pt-5">
+    <div className="container_div">
+      <h1 className="">Checkers by Wendy</h1>
+      <div className="board_dash_div">
       <div className="theBoard"  >
 
         {boardValue.slice(1).map((board, ind) =>
@@ -705,12 +707,12 @@ export const Checkers = () => {
 
       <div className="score_board" >
         <div className="score_div">
-          <h5> Player 1 : {playerScore.player}<br />
+          <h4> Player 1 : {playerScore.player}<br />
             Move: {playerScore.playerM}<br /><br />
             Player 2 : {playerScore.player2}<br />
             Move: {playerScore.player2M}<br /><br /><br />
             Total Move : {countMove}
-          </h5>
+          </h4>
         </div>
 
         <button className="btn btn-secondary mt-3 p-3" onClick={() => undo_function()}><i className="fa-solid fa-arrow-rotate-left fa-2xl"></i></button><br />
@@ -721,7 +723,7 @@ export const Checkers = () => {
         }}><h5>Start over</h5></button>
 
       </div>
-
+      </div>
 
       
       <dialog id="modal_dialog" className="rounded dialog_margin">
