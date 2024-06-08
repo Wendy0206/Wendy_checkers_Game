@@ -108,49 +108,45 @@ export const Checkers = () => {
 
 
 
-  // function check_whos_playing(board) {
+  function check_whos_playing(board) {
 
-  //   if (countMove % 2== 0) {
+    if (countMove % 2== 0) {
 
-  //     if (boardValue[board.position].checker == 'O' || boardValue[potentialMove.current].checker.charAt(0)=='O') {
+      if (boardValue[board.position].checker.charAt(0) == 'O' || ( potentialMove.current && boardValue[potentialMove.current].checker.charAt(0)=='O')) {
 
-  //         Move_cell(board);
-  //     }
-  //     else {
-  //       var clear_potential_move = {};
-  //   setPotentialMove(clear_potential_move);
-  //   remove_highlight();
-  //       alert('it is not your turn player X');
-  //     }
-  //   }
+          Move_cell(board);
+      }
+      else {
+        var clear_potential_move = {};
+    setPotentialMove(clear_potential_move);
+    remove_highlight();
+        alert('it is not your turn player X');
+      }
+    }
 
-  //   else {
-  //     if (boardValue[board.position].checker == 'X' ||  boardValue[potentialMove.current].checker.charAt(0)=='X' ) {
+    else {
+      if (boardValue[board.position].checker.charAt(0) == 'X' ||  (potentialMove.current && boardValue[potentialMove.current].checker.charAt(0)=='X') ) {
 
-  //           Move_cell(board)
-  //     }
-  //     else {
-  //       var clear_potential_move = {};
-  //   setPotentialMove(clear_potential_move);
-  //   remove_highlight();
-  //       alert('it is not your turn player O');
-  //     }
+            Move_cell(board)
+      }
+      else {
+        var clear_potential_move = {};
+    setPotentialMove(clear_potential_move);
+    remove_highlight();
+        alert('it is not your turn player O');
+      }
 
-  //   }
+    }
 
-  // }
+  }
 
   function jump_move(board) {
-    console.log('the jump function was reached');
-
-
+   
     // below we get the current record for the undo function before we change it
     setLastRecord(playerScore);
 
     // below we clone the board to make the changes
     let clone_board = [...boardValue];
-
-
 
     // set the new record for our dashboard
     var clone_player_score = { player: playerScore.player, playerM: playerScore.playerM, player2: playerScore.player2, player2M: playerScore.player2M };
@@ -233,7 +229,7 @@ export const Checkers = () => {
       which_score = 2;
     }
 
-    else if (board.position == potentialMove.fourthlu) {
+    else if (board.position == potentialMove.bfourthlu) {
       clone_board[potentialMove.bjumpl].checker = '';
       clone_board[potentialMove.bjump2lu].checker = '';
       which_score = 2;
@@ -253,11 +249,11 @@ export const Checkers = () => {
 
 
     // below we check the player and move the piece from its initial to its final position
-    if (boardValue[potentialMove.current].checker == 'O') {
+    if (boardValue[potentialMove.current].checker.charAt(0) == 'O') {
 
       // where you land
       clone_board[board.position].checker = 'O';
-      if (potentialMove.king_player) { clone_board[board.position].checker = 'OK' };
+      if (boardValue[potentialMove.current].checker=="OK") { clone_board[board.position].checker = 'OK' };
 
       // here we check if you land on the first line to become a king
       if (board.position == 64 || board.position == 62 || board.position == 60 || board.position == 58) { clone_board[board.position].checker = 'OK'; }
@@ -267,11 +263,11 @@ export const Checkers = () => {
 
       // and here we add the score
       clone_player_score.player = playerScore.player + which_score;
-    } else if (boardValue[potentialMove.current].checker == 'X') {
+    } else if (boardValue[potentialMove.current].checker.charAt(0) == 'X') {
 
       // where you land
       clone_board[board.position].checker = 'X';
-      if (potentialMove.king_player) { clone_board[board.position].checker = 'XK' };
+      if (boardValue[potentialMove.current].checker=="XK") { clone_board[board.position].checker = 'XK' };
 
       // here we check if you land on the first line to become a king
       if (board.position == 1 || board.position == 3 || board.position == 5 || board.position == 7) { clone_board[board.position].checker = 'XK'; }
@@ -310,21 +306,48 @@ export const Checkers = () => {
     // below we remove the potential css class that highlights the move
     remove_highlight();
 
-    console.log('This is the square you click on : ', board);
-
-
-    console.log('This is the potential move we have right now before you move : ', potentialMove);
+    const potentialPositions = [
+      potentialMove.firstl,
+      potentialMove.firstr,
+      potentialMove.bfirstl,
+      potentialMove.bfirstr,
+      potentialMove.thirdl,
+      potentialMove.thirdr,
+      potentialMove.fourthl,
+      potentialMove.fourthr,
+      potentialMove.fourthld,
+      potentialMove.fourthlu,
+      potentialMove.fourthrd,
+      potentialMove.fourthru,
+     potentialMove.bfirstl,
+     potentialMove.bfirstr,
+     potentialMove.bbfirstl,
+     potentialMove.bbfirstr,
+     potentialMove.bthirdl,
+     potentialMove.bthirdr,
+     potentialMove.bfourthl,
+     potentialMove.bfourthr,
+     potentialMove.bfourthld,
+     potentialMove.bfourthlu,
+     potentialMove.bfourthrd,
+     potentialMove.bfourthru,
+   
+  ];
+  
     // check if this move is the result of a potential clean move or an attempt to jump your opponent piece
-    if (board.position == potentialMove.firstl || board.position == potentialMove.firstr || board.position == potentialMove.jumpl || board.position == potentialMove.jumpr || board.position == potentialMove.jump2l || board.position == potentialMove.jump2r || board.position == potentialMove.jump2ld || board.position == potentialMove.jump2lu || board.position == potentialMove.jump2rd || board.position == potentialMove.jump2ru || board.position == potentialMove.bfirstl || board.position == potentialMove.bfirstr || board.position == potentialMove.bjumpl || board.position == potentialMove.bjumpr || board.position == potentialMove.bjump2l || board.position == potentialMove.bjump2r || board.position == potentialMove.bjump2ld || board.position == potentialMove.bjump2lu || board.position == potentialMove.bjump2rd || board.position == potentialMove.bjump2ru) {
-      console.log('we did reach the second check');
+    if (potentialPositions.includes(board.position)) {
       jump_move(board);
       return;
+    }else{
+      var clear_potential_move = {};
+      setPotentialMove(clear_potential_move);
     }
 
 
 
     // if it wasn't potential move taking place so the player is checking if he/she can move
     if (boardValue[board.position].checker) {
+    
       let current_spot = '#C' + board.position;
       let this_spot = document.querySelector(current_spot);
       this_spot.classList.add('current_move');
@@ -344,9 +367,8 @@ export const Checkers = () => {
       }
 
     }
+
   }
-
-
 
 
 
@@ -666,7 +688,7 @@ export const Checkers = () => {
 
         {boardValue.slice(1).map((board, ind) =>
           // icon for king move <i class="fa-solid fa-crown"></i>
-          <div key={ind} className={board.classN} id={board.id} onClick={(e) => Move_cell(board)}><span><p>{board.checker}</p> <i className={board.checker == 'O' ? "fa-solid fa-spider fa-2xl" : board.checker == 'X' ? "fa-solid fa-mosquito fa-2xl text-dark" : board.checker == 'XK' ? "fa-solid fa-crown fa-2xl black_king" : board.checker == 'OK' ? "fa-solid fa-chess-queen fa-2xl" : " "}></i></span></div>
+          <div key={ind} className={board.classN} id={board.id} onClick={(e) => check_whos_playing(board)}><span><p>{board.checker}</p> <i className={board.checker == 'O' ? "fa-solid fa-spider fa-2xl" : board.checker == 'X' ? "fa-solid fa-mosquito fa-2xl text-dark" : board.checker == 'XK' ? "fa-solid fa-crown fa-2xl black_king" : board.checker == 'OK' ? "fa-solid fa-chess-queen fa-2xl" : " "}></i></span></div>
         )}
       </div>
 
