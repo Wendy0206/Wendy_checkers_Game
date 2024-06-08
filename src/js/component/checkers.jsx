@@ -308,7 +308,7 @@ export const Checkers = () => {
     // below we remove the potential css class that highlights the move
     remove_highlight();
 
-    if(playerScore.player==2 || playerScore.player2==2){
+    if(playerScore.player==8 || playerScore.player2==8){
       const dialog = document.getElementById('modal_dialog');
       initialize_board();
     setPotentialMove({});
