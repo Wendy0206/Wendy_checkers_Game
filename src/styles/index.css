@@ -87,3 +87,8 @@ span{
   }
 }
 
+.dialog_margin{
+	margin: auto;
+	padding: 15px 15px 15px 15px;
+	border-radius:  5px solid black;
+}

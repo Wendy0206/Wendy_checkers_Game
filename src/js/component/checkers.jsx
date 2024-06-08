@@ -12,7 +12,6 @@ export const Checkers = () => {
   const [lastRecord, setLastRecord] = useState({});
 
   useEffect(() => {
-
     initialize_board();
 
   }, []);
@@ -294,6 +293,9 @@ export const Checkers = () => {
     // reset the potential move obj
     var clear_potential_move = {};
     setPotentialMove(clear_potential_move);
+
+
+   
     return;
 
     // here the jump_move function ends
@@ -305,6 +307,14 @@ export const Checkers = () => {
 
     // below we remove the potential css class that highlights the move
     remove_highlight();
+
+    if(playerScore.player==2 || playerScore.player2==2){
+      const dialog = document.getElementById('modal_dialog');
+      initialize_board();
+    setPotentialMove({});
+    dialog.showModal();
+    
+    }
 
     const potentialPositions = [
       potentialMove.firstl,
@@ -682,12 +692,13 @@ export const Checkers = () => {
 
   }
 
+
   return (
     <div className="container d-flex pt-5">
       <div className="theBoard"  >
 
         {boardValue.slice(1).map((board, ind) =>
-          // icon for king move <i class="fa-solid fa-crown"></i>
+        
           <div key={ind} className={board.classN} id={board.id} onClick={(e) => check_whos_playing(board)}><span><p>{board.checker}</p> <i className={board.checker == 'O' ? "fa-solid fa-spider fa-2xl" : board.checker == 'X' ? "fa-solid fa-mosquito fa-2xl text-dark" : board.checker == 'XK' ? "fa-solid fa-crown fa-2xl black_king" : board.checker == 'OK' ? "fa-solid fa-chess-queen fa-2xl" : " "}></i></span></div>
         )}
       </div>
@@ -710,6 +721,25 @@ export const Checkers = () => {
         }}><h5>Start over</h5></button>
 
       </div>
+
+
+      
+      <dialog id="modal_dialog" className="rounded dialog_margin">
+
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Congratulations!!!!! You win!!! </p>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" style={{ fontFamily: "arial" }} onClick={() => {
+              const dialog = document.getElementById('modal_dialog');
+              dialog.close();
+            }}>Close</button>
+          </div>
+
+        </div>
+
+      </dialog>
 
     </div>
 
