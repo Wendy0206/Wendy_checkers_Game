@@ -67,7 +67,6 @@ span {
 }
 
 
-
 .score_board{
   position: relative;
   display: flex;
@@ -76,24 +75,15 @@ span {
 
 }
 
-.impossible_move{
-  border: 1px solid red;
-}
-
-.landing_spot{
-  border: 1px solid red;
-}
-
 .current_move{
   border: 2px solid red;
 }
 
 .possible_move{
   animation: blink 1.5s linear infinite;
-  background-color: rgb(86, 83, 83);
-  
-  
+  background-color: rgb(86, 83, 83); 
 }
+
 
 @keyframes blink {
   25% { 
@@ -135,8 +125,6 @@ span {
   .theBoard{
     position: relative;
       width: 70%;
-      height: 50vh;
-   
   }
 
   span{
@@ -147,8 +135,13 @@ span {
 }
 
 .score_board{
-  width: 15%;
-  margin-top: 5%;
+  width: 20%;
 }
+
+.score_div{
+ margin-right: 10%;
+ 
+}
+
 
 }
