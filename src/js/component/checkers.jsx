@@ -695,7 +695,7 @@ export const Checkers = () => {
 
   return (
     <div className="container_div">
-      <h1 className="">Checkers by Wendy</h1>
+      <h1 className="">Checkers</h1>
       <div className="board_dash_div">
       <div className="theBoard"  >
 
@@ -707,20 +707,21 @@ export const Checkers = () => {
 
       <div className="score_board" >
         <div className="score_div">
-          <h4> Player 1 : {playerScore.player}<br />
-            Move: {playerScore.playerM}<br /><br />
-            Player 2 : {playerScore.player2}<br />
-            Move: {playerScore.player2M}<br /><br /><br />
+          <h4> Player 1 : {playerScore.player}  </h4>
+          <h4> Move: {playerScore.playerM} </h4>
+          <h4>  Player 2 : {playerScore.player2}<br />
+            Move: {playerScore.player2M}<br/><br />
             Total Move : {countMove}
           </h4>
         </div>
-
-        <button className="btn btn-secondary mt-3 p-3" onClick={() => undo_function()}><i className="fa-solid fa-arrow-rotate-left fa-2xl"></i></button><br />
+<div >
+        <button className="btn btn-secondary mt-3 p-3" onClick={() => undo_function()}><i className="fa-solid fa-arrow-rotate-left fa-xl"></i></button><br />
         <button className="btn btn-danger mt-3 p-3" onClick={() => {
           remove_highlight();
           setPotentialMove({});
           initialize_board();
         }}><h5>Start over</h5></button>
+        </div>
 
       </div>
       </div>
