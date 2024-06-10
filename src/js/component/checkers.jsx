@@ -466,7 +466,7 @@ export const Checkers = () => {
     }
 
     // check if your second move is a potential game
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '') {
+    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 18].type) {
       let nw_spot = board.position + 18;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -491,7 +491,7 @@ export const Checkers = () => {
 
 
     // check if your first potential move is a double game down
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 25] && boardValue[board.position + 25].checker.charAt(0) == opponent && boardValue[board.position + 32] && boardValue[board.position + 32].checker == '') {
+    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 25] && boardValue[board.position + 25].checker.charAt(0) == opponent && boardValue[board.position + 32] && boardValue[board.position + 32].checker == '' && boardValue[board.position + 32].type) {
       let nw_spot = board.position + 32;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
