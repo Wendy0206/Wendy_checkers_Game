@@ -119,7 +119,7 @@ export const Checkers = () => {
         var clear_potential_move = {};
     setPotentialMove(clear_potential_move);
     remove_highlight();
-        alert('it is not your turn player X');
+        alert('it is not your turn');
       }
     }
 
@@ -132,7 +132,7 @@ export const Checkers = () => {
         var clear_potential_move = {};
     setPotentialMove(clear_potential_move);
     remove_highlight();
-        alert('it is not your turn player O');
+        alert('it is not your turn');
       }
 
     }
@@ -308,7 +308,7 @@ export const Checkers = () => {
     // below we remove the potential css class that highlights the move
     remove_highlight();
 
-    if(playerScore.player==8 || playerScore.player2==8){
+    if(playerScore.player==12 || playerScore.player2==12){
       const dialog = document.getElementById('modal_dialog');
       initialize_board();
     setPotentialMove({});
@@ -701,7 +701,7 @@ export const Checkers = () => {
 
         {boardValue.slice(1).map((board, ind) =>
         
-          <div key={ind} className={board.classN} id={board.id} onClick={(e) => check_whos_playing(board)}><span><p>{board.checker}</p> <i className={board.checker == 'O' ? "fa-solid fa-spider fa-2xl" : board.checker == 'X' ? "fa-solid fa-mosquito fa-2xl text-dark" : board.checker == 'XK' ? "fa-solid fa-crown fa-2xl black_king" : board.checker == 'OK' ? "fa-solid fa-chess-queen fa-2xl" : " "}></i></span></div>
+          <div key={ind} className={board.classN} id={board.id} onClick={(e) => check_whos_playing(board)}><span><p>{board.checker}</p> <i className={board.checker == 'O' ? "fa-solid fa-spider fa-rotate-180 fa-2xl" : board.checker == 'X' ? "fa-solid fa-mosquito fa-2xl text-dark" : board.checker == 'XK' ? "fa-solid fa-crown fa-2xl black_king" : board.checker == 'OK' ? "fa-solid fa-chess-queen fa-2xl" : " "}></i></span></div>
         )}
       </div>
 
