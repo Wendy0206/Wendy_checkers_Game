@@ -82,7 +82,7 @@ export const Checkers = () => {
   }
 
 
-  function remove_highlight() {
+ const remove_highlight=()=> {
 
     let all_sqr = document.querySelectorAll('.possible_move');
     if (all_sqr) {
@@ -107,7 +107,7 @@ export const Checkers = () => {
 
 
 
-  function check_whos_playing(board) {
+ const check_whos_playing=(board)=> {
 
     if (countMove % 2== 0) {
 
@@ -139,9 +139,9 @@ export const Checkers = () => {
 
   }
 
-  function jump_move(board) {
+ const jump_move=(board)=> {
    
-    // below we get the current record for the undo function before we change it
+    // below we get the current record for the undoconst before we change it
     setLastRecord(playerScore);
 
     // below we clone the board to make the changes
@@ -277,6 +277,15 @@ export const Checkers = () => {
       // and here we add the score
       clone_player_score.player2 = playerScore.player2 + which_score;
     }
+    
+
+
+    if( clone_player_score.player>11 ||  clone_player_score.player2>11){
+      const dialog = document.getElementById('modal_dialog');
+    
+    dialog.showModal();
+  
+    }
 
 
     // clear where you come from
@@ -298,23 +307,16 @@ export const Checkers = () => {
    
     return;
 
-    // here the jump_move function ends
+    // here the jump_moveconst ends
   }
 
 
 
-  function Move_cell(board) {
+ const Move_cell=(board)=> {
 
     // below we remove the potential css class that highlights the move
     remove_highlight();
 
-    if(playerScore.player==12 || playerScore.player2==12){
-      const dialog = document.getElementById('modal_dialog');
-      initialize_board();
-    setPotentialMove({});
-    dialog.showModal();
-    return;
-    }
 
     const potentialPositions = [
       potentialMove.firstl,
@@ -383,7 +385,7 @@ export const Checkers = () => {
 
 
 
-  function first_player_check_move(board, opponent) {
+ const first_player_check_move=(board, opponent) =>{
 
     var clone_obj = { current: board.position };
 
@@ -491,7 +493,7 @@ export const Checkers = () => {
 
 
     // check if your first potential move is a double game down
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 25] && boardValue[board.position + 25].checker.charAt(0) == opponent && boardValue[board.position + 32] && boardValue[board.position + 32].checker == '' && boardValue[board.position + 32].type) {
+    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 18].type && boardValue[board.position + 25] && boardValue[board.position + 25].checker.charAt(0) == opponent && boardValue[board.position + 32] && boardValue[board.position + 32].checker == '' && boardValue[board.position + 32].type) {
       let nw_spot = board.position + 32;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -504,7 +506,7 @@ export const Checkers = () => {
     }
 
     // check if your first potential move is a double game up
-    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 11].checker.charAt(0) == opponent && boardValue[board.position + 4].checker == '' && boardValue[board.position + 4].type == true) {
+    if (boardValue[board.position + 9] && boardValue[board.position + 9].checker.charAt(0) == opponent && boardValue[board.position + 18] && boardValue[board.position + 18].checker == '' && boardValue[board.position + 18].type && boardValue[board.position + 11].checker.charAt(0) == opponent && boardValue[board.position + 4].checker == '' && boardValue[board.position + 4].type == true) {
       let nw_spot = board.position + 4;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -518,13 +520,13 @@ export const Checkers = () => {
 
     setPotentialMove(clone_obj);
     get_board_record();
-    console.log('this is the potential move in our state : ', clone_obj);
+     console.log('this is the potential move in our state : ', clone_obj);
     return clone_obj;
 
   }
 
 
-  function second_player_check_move(board, opponent) {
+ const second_player_check_move =(board, opponent)=> {
 
     var clone_obj = { current: board.position }
 
@@ -577,7 +579,7 @@ export const Checkers = () => {
     }
 
     // check if your first potential move is a double game down
-    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker.charAt(0) == opponent && boardValue[board.position - 14] && boardValue[board.position - 14].checker == '' && boardValue[board.position - 5] && boardValue[board.position - 5].checker.charAt(0) == opponent && boardValue[board.position + 4] && boardValue[board.position + 4].checker == '' && boardValue[board.position + 4].type) {
+    if (boardValue[board.position - 7] && boardValue[board.position - 7].checker.charAt(0) == opponent && boardValue[board.position - 14] && boardValue[board.position - 14].checker == '' && boardValue[board.position - 14].type && boardValue[board.position - 5] && boardValue[board.position - 5].checker.charAt(0) == opponent && boardValue[board.position + 4] && boardValue[board.position + 4].checker == '' && boardValue[board.position + 4].type) {
       let nw_spot = board.position + 4;
       let get_id = '#C' + nw_spot;
       let second_spot = document.querySelector(get_id);
@@ -637,7 +639,7 @@ export const Checkers = () => {
     }
 
     // check if your second potential move is a double game Down
-    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker.charAt(0) == opponent && boardValue[board.position - 18] && boardValue[board.position - 18] && boardValue[board.position - 18].checker == '' && boardValue[board.position - 11].checker.charAt(0) == opponent && boardValue[board.position - 4].checker == '' && boardValue[board.position - 4].type == true) {
+    if (boardValue[board.position - 9] && boardValue[board.position - 9].checker.charAt(0) == opponent && boardValue[board.position - 18] && boardValue[board.position - 18].type && boardValue[board.position - 18].checker == '' && boardValue[board.position - 11].checker.charAt(0) == opponent && boardValue[board.position - 4].checker == '' && boardValue[board.position - 4].type == true) {
       let nw_spot = board.position - 4;
       let get_id = '#C' + nw_spot;
       let first_spot = document.querySelector(get_id);
@@ -655,7 +657,7 @@ export const Checkers = () => {
   }
 
 
-  function king_check_move(board) {
+ const king_check_move=(board)=> {
 
     var clone_obj = { current: board.position };
 
@@ -677,7 +679,7 @@ export const Checkers = () => {
 
 
 
-  function undo_function() {
+ const undo_function=()=> {
 
     // we check the countMove to make sure we don't do anything if you haven't done anything yet. 
     if (countMove > 0) {
@@ -735,7 +737,10 @@ export const Checkers = () => {
           </div>
           <div class="modal-footer d-flex justify-content-center">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" style={{ fontFamily: "arial" }} onClick={() => {
+                initialize_board();
+                setPotentialMove({});
               const dialog = document.getElementById('modal_dialog');
+
               dialog.close();
             }}>Close</button>
           </div>
