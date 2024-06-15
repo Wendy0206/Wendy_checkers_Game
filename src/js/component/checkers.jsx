@@ -683,7 +683,6 @@ export const Checkers = () => {
 
       // now we're going to check the right side double
       if (pos18) {
-console.log('this one was called for all right double')
 
         // check if your first potential move is a double game
         if (pos9 && boardValue[pos + 9].checker.charAt(0) == opponent && pos27 && boardValue[pos + 27].checker.charAt(0) == opponent && pos36) {
@@ -718,7 +717,6 @@ console.log('this one was called for all right double')
 
         // check if your first potential move is a double game up
         if (pos9 && boardValue[pos + 9].checker.charAt(0) == opponent && pos11 && boardValue[pos + 11].checker.charAt(0) == opponent && pos4p && boardValue[pos + 4].checker == '') {
-          console.log('this one was called for all right double up')
           let nw_spot = pos + 4;
           let get_id = '#C' + nw_spot;
           let first_spot = document.querySelector(get_id);
@@ -942,7 +940,6 @@ console.log('this one was called for all right double')
 
   //     // an undo basically sets the the game back by one move, to do this we set the Boardvalue with the undoBoardValue.
   //    let get_record= [...undoBoard.current[countMove-1]];
-  //    console.log(' this is the record we got ', get_record);
   //     setBoardValue(get_record);
   //     setPlayerScore(lastRecord);
   //     setCountMove(countMove - 1);
