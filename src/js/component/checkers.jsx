@@ -183,7 +183,7 @@ export const Checkers = () => {
       // check the potential of each piece then move the one with the highest potential
       first_player.forEach((elm) => {
         let response = first_player_check_move(elm.position, 'X');
-        if (response.size >= test) {
+        if (response.size > test) {
           final = { ...response };
           test = response.size;
         }
