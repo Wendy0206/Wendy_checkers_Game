@@ -47,10 +47,10 @@ export const Checkers = () => {
         if ((i - 1) % 8 == 0) {
           newObj.classN = 'dark_brown';
           newObj.type = true;
-          if (i < 24 && i>16) {
+          if (i < 24 ) {
             newObj.checker = 'O';
           }
-          if (i > 40 && i<49) {
+          if (i > 40 ) {
             newObj.checker = 'X';
           }
 
@@ -69,10 +69,10 @@ export const Checkers = () => {
         else {
           newObj.classN = 'dark_brown';
           newObj.type = true;
-          if (i < 24 && i>16) {
+          if (i < 24 ) {
             newObj.checker = 'O';
           }
-          if (i > 40 && i<49) {
+          if (i > 40) {
             newObj.checker = 'X';
           }
 
@@ -271,8 +271,8 @@ export const Checkers = () => {
 
 
     }
-    console.log('this is the potential move of our computer : ', final);
-    console.log('this is what we got in next_spot : ', next_spot);
+    // console.log('this is the potential move of our computer : ', final);
+    // console.log('this is what we got in next_spot : ', next_spot);
     potentialMove.current = { ...final };
     let random_index = next_spot[Math.floor(Math.random() * next_spot.length)];
     jump_move(boardValue[random_index].position);
