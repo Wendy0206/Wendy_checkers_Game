@@ -23,7 +23,7 @@ export const Checkers = () => {
       setTimeout(function () {
         computer_play();
         setCountMove(countMove + 1);
-      }, 500);
+      }, 700);
     }
   }, [countMove]);
 
@@ -47,10 +47,10 @@ export const Checkers = () => {
         if ((i - 1) % 8 == 0) {
           newObj.classN = 'dark_brown';
           newObj.type = true;
-          if (i < 24) {
+          if (i < 24 && i>16) {
             newObj.checker = 'O';
           }
-          if (i > 40) {
+          if (i > 40 && i<49) {
             newObj.checker = 'X';
           }
 
@@ -69,12 +69,13 @@ export const Checkers = () => {
         else {
           newObj.classN = 'dark_brown';
           newObj.type = true;
-          if (i < 24) {
+          if (i < 24 && i>16) {
             newObj.checker = 'O';
           }
-          if (i > 40) {
+          if (i > 40 && i<49) {
             newObj.checker = 'X';
           }
+
 
         }
 
@@ -98,19 +99,16 @@ export const Checkers = () => {
 
     let all_sqr = document.querySelectorAll('.possible_move');
     if (all_sqr) {
-      for (let i = 0; i < all_sqr.length; i++) {
-        all_sqr[i].classList.remove('possible_move');
-      }
+      all_sqr.forEach((elm)=>
+        elm.classList.remove('possible_move'))  
     }
 
     let all_current = document.querySelectorAll('.theBoard>div');
     if (all_current) {
-      for (let i = 0; i < all_current.length; i++) {
-        all_current[i].classList.remove('current_move');
-      }
-    }
-
-  }
+      all_current.forEach((elm)=>
+        elm.classList.remove('current_move')
+      )}
+}
 
   const activate_two_player_mode = (e) => {
     if (e.target.checked) {
@@ -129,12 +127,12 @@ export const Checkers = () => {
 
   const check_whos_playing = (pos) => {
 
- if (boardValue[potentialMove.current.current]) {
-  var check = boardValue[potentialMove.current.current].checker.charAt(0) == 'X' ? true : false;
-  var check2 = boardValue[potentialMove.current.current].checker.charAt(0) == 'O' ? true : false;
-  }
+    if (boardValue[potentialMove.current.current]) {
+      var check = boardValue[potentialMove.current.current].checker.charAt(0) == 'X' ? true : false;
+      var check2 = boardValue[potentialMove.current.current].checker.charAt(0) == 'O' ? true : false;
+    }
 
-    if (countMove % 2== 0) {
+    if (countMove % 2 == 0) {
       if (boardValue[pos].checker.charAt(0) == 'X' || check) {
         Move_cell(pos)
       }
@@ -149,18 +147,16 @@ export const Checkers = () => {
     else {
       if (boardValue[pos].checker.charAt(0) == 'O' || check2) {
         Move_cell(pos);
-     }
-     else {
-       potentialMove.current = {};
-       remove_highlight();
-       alert('it is not your turn');
-     }
+      }
+      else {
+        potentialMove.current = {};
+        remove_highlight();
+        alert('it is not your turn');
+      }
 
     }
 
   }
-
-
 
   const computer_play = () => {
 
@@ -168,16 +164,6 @@ export const Checkers = () => {
     let all_king = boardValue.filter((b) => b.checker === "OK");
     let final = {};
     let test = -1;
-
-    if (all_king) {
-      all_king.forEach((elm) => {
-        let response = second_player_check_move(elm.position, 'X');
-        if (response.size > test) {
-          final = { ...response };
-          test = response.size;
-        }
-      })
-    }
 
     if (first_player) {
       // check the potential of each piece then move the one with the highest potential
@@ -190,6 +176,15 @@ export const Checkers = () => {
       })
     }
 
+    if (all_king) {
+      all_king.forEach((elm) => {
+        let response = second_player_check_move(elm.position, 'X');
+        if (response.size >= test) {
+          final = { ...response };
+          test = response.size;
+        }
+      })
+    }
 
 
     let next_spot = [];
@@ -258,7 +253,6 @@ export const Checkers = () => {
         next_spot.push(final.bthirdr);
       }
 
-
     }
     else if (final.size == 0) {
       if (final.firstl) {
@@ -277,7 +271,8 @@ export const Checkers = () => {
 
 
     }
-
+    console.log('this is the potential move of our computer : ', final);
+    console.log('this is what we got in next_spot : ', next_spot);
     potentialMove.current = { ...final };
     let random_index = next_spot[Math.floor(Math.random() * next_spot.length)];
     jump_move(boardValue[random_index].position);
@@ -460,8 +455,6 @@ export const Checkers = () => {
       dialog.showModal();
     }
 
-
-
     // clear where you come from
     clone_board[move.current].checker = '';
 
@@ -538,7 +531,7 @@ export const Checkers = () => {
         second_player_check_move(pos, opponent);
       }
       else if (boardValue[pos].checker == 'XK' || boardValue[pos].checker == 'OK') {
-        king_check_move(boardValue[pos]);
+        king_check_move(pos);
       }
 
     }
@@ -553,7 +546,7 @@ export const Checkers = () => {
 
     if (boardValue[pos - 4] && boardValue[pos - 4].type) { pos4 = true; }
     if (boardValue[pos + 4] && boardValue[pos + 4].type) { pos4p = true; }
-   
+
     if (boardValue[pos + 5] && boardValue[pos + 5].type) { pos5 = true; }
     if (boardValue[pos + 7] && boardValue[pos + 7].type) { pos7 = true; }
     if (boardValue[pos + 9] && boardValue[pos + 9].type) { pos9 = true; }
@@ -733,11 +726,7 @@ export const Checkers = () => {
       }
 
     }
-
-  
-
     potentialMove.current = { ...clone_obj };
-    // console.log('this is the potential move in our state : ', clone_obj);
 
     return clone_obj;
 
@@ -754,7 +743,6 @@ export const Checkers = () => {
     if (boardValue[pos - 7] && boardValue[pos - 7].type) { pos7 = true; }
     if (boardValue[pos - 9] && boardValue[pos - 9].type) { pos9 = true; }
     if (boardValue[pos - 18] && boardValue[pos - 18].type) { pos18 = true; }
-
     if (boardValue[pos - 14] && boardValue[pos - 14].type) { pos14 = true; }
     if (boardValue[pos - 21] && boardValue[pos - 21].type) { pos21 = true; }
     if (boardValue[pos - 28] && boardValue[pos - 28].type) { pos28 = true; }
@@ -865,8 +853,6 @@ export const Checkers = () => {
           clone_obj.size = 2;
         }
 
-
-
       }
 
 
@@ -914,22 +900,25 @@ export const Checkers = () => {
         }
       }
     }
-
     potentialMove.current = { ...clone_obj };
     return clone_obj;
   }
 
-  const king_check_move = (board) => {
-    let pos = board.position;
+  const king_check_move = (pos) => {
+    //let pos = board.position;
     let opponent = 'X';
-    if (board.checker.charAt(0) == 'X') {
+    if (boardValue[pos].checker.charAt(0) == 'X') {
       opponent = 'O';
     }
-
     let forward_potential = first_player_check_move(pos, opponent);
     let backward_potential = second_player_check_move(pos, opponent);
+
+    let best_size=backward_potential.size;
+    if(forward_potential.size>backward_potential.size){ best_size= forward_potential.size}
     let clone_obj = { ...forward_potential, ...backward_potential };
+    clone_obj.size=best_size;
     potentialMove.current = { ...clone_obj };
+
   }
 
   // this function is yet to be completed, we set the button to display none 
@@ -972,11 +961,10 @@ export const Checkers = () => {
           <div className="side_feature" >
             <button className="btn btn-secondary mt-3 p-3 d-none" onClick={() => undo_function()}><i className="fa-solid fa-arrow-rotate-left fa-xl"></i></button><br />
 
-            <div class="form-check form-switch form-check-inline ">
-              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onChange={(e) => activate_two_player_mode(e)} />
-              <label class="form-check-label" for="flexSwitchCheckDefault"> Two player</label>
+            <div className="form-check form-switch form-check-inline ">
+              <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onChange={(e) => activate_two_player_mode(e)} />
+              <label className="form-check-label" for="flexSwitchCheckDefault"> Two player</label>
             </div>
-
 
             <button className="btn btn-danger mt-3 p-3" onClick={() => {
               remove_highlight();
@@ -984,9 +972,6 @@ export const Checkers = () => {
               undoBoard.current = {};
               initialize_board();
             }}><h5>Start over</h5></button>
-            {/* 
-<button className="btn btn-success mt-3 p-3" onClick={() => computer_play()}><h5>test button</h5></button> */}
-
 
           </div>
 
@@ -996,12 +981,12 @@ export const Checkers = () => {
 
       <dialog id="modal_dialog" className="rounded dialog_margin">
 
-        <div class="modal-content">
-          <div class="modal-body">
+        <div className="modal-content">
+          <div className="modal-body">
             <p>Congratulations!!!  <i className={playerScore.player2 > 11 ? "fa-solid fa-mosquito" : "fa-solid fa-mosquito"}></i> wins !!! </p>
           </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" style={{ fontFamily: "arial" }} onClick={() => {
+          <div className="modal-footer d-flex justify-content-center">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal" style={{ fontFamily: "arial" }} onClick={() => {
               initialize_board();
               potentialMove.current = {};
               const dialog = document.getElementById('modal_dialog');
